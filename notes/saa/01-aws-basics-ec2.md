@@ -131,5 +131,5 @@
 - [x] IAM — 已答题通过
 - [x] EC2 实例类型 + 购买选项 — 已答题通过
 - [x] EC2 存储 + AMI + ASG — 已讲解
-- [ ] **待完成：Week 1-2 综合题（4 道）**
-- [ ] 进入 Week 3：ELB / Route 53 / CloudFront
+- [x] Week 1-2 综合题 — 4 题对 2 题（错题见 practice/saa/01-week1-2-errors.md）
+- [x] 已进入 Week 3
