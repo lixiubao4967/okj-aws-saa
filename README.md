@@ -36,22 +36,22 @@ SAA-C03 (约 8-12 周)  →  SAP-C02 (约 8-12 周)
 
 ### 10 周学习计划
 
-#### Week 1-2：AWS 基础 + 计算服务
-- [ ] AWS 全球基础设施（Region、AZ、Edge Location）
-- [ ] IAM：用户、组、角色、策略、MFA、STS
-- [ ] EC2：实例类型、购买选项（On-Demand/Reserved/Spot/Dedicated）
-- [ ] EC2 存储：EBS 类型、实例存储、EBS 快照
-- [ ] AMI、Auto Scaling Group、Launch Template
+#### Week 1-2：AWS 基础 + 计算服务 ✅
+- [x] AWS 全球基础设施（Region、AZ、Edge Location）
+- [x] IAM：用户、组、角色、策略、MFA、STS
+- [x] EC2：实例类型、购买选项（On-Demand/Reserved/Spot/Dedicated）
+- [x] EC2 存储：EBS 类型、实例存储、EBS 快照
+- [x] AMI、Auto Scaling Group、Launch Template
 
-#### Week 3：高可用 + 负载均衡
-- [ ] ELB：ALB / NLB / GLB / CLB 区别与使用场景
-- [ ] Auto Scaling 策略（目标追踪、步进、计划）
-- [ ] Route 53：路由策略（Simple/Weighted/Latency/Failover/Geolocation/Multivalue）
-- [ ] CloudFront + S3 静态网站加速
+#### Week 3：高可用 + 负载均衡 ✅
+- [x] ELB：ALB / NLB / GLB / CLB 区别与使用场景
+- [x] Auto Scaling 策略（目标追踪、步进、计划）
+- [x] Route 53：路由策略（Simple/Weighted/Latency/Failover/Geolocation/Multivalue）
+- [x] CloudFront + S3 静态网站加速
 
-#### Week 4：存储服务
-- [ ] S3：存储类型、生命周期策略、跨区复制（CRR/SRR）
-- [ ] S3 安全：Bucket Policy、ACL、Pre-signed URL、SSE-S3/KMS/C
+#### Week 4：存储服务 ✅
+- [x] S3：存储类型、生命周期策略、跨区复制（CRR/SRR）
+- [x] S3 安全：Bucket Policy、ACL、Pre-signed URL、SSE-S3/KMS/C
 - [ ] EFS vs EBS vs S3 使用场景对比
 - [ ] Storage Gateway、Snowball/Snowcone/Snowmobile
 
@@ -162,20 +162,16 @@ okj-aws-saa/
 ├── README.md              # 本文件：总学习计划
 ├── notes/
 │   ├── saa/               # SAA-C03 知识点笔记
-│   │   ├── 01-iam.md
-│   │   ├── 02-ec2.md
-│   │   ├── 03-storage.md
-│   │   ├── 04-database.md
-│   │   ├── 05-networking.md
-│   │   ├── 06-security.md
-│   │   ├── 07-serverless.md
-│   │   └── 08-monitoring.md
+│   │   ├── 01-aws-basics-ec2.md
+│   │   ├── 02-high-availability-lb.md
+│   │   └── 03-s3-storage-security.md
 │   └── sap/               # SAP-C02 进阶笔记
 │       ├── 01-organizations.md
 │       ├── 02-hybrid-network.md
 │       └── 03-migration.md
 ├── practice/
 │   ├── saa/               # SAA 错题本 + 模拟记录
+│   │   └── 01-week1-2-errors.md
 │   └── sap/               # SAP 错题本 + 模拟记录
 └── cheatsheets/           # 考前速查表
     ├── saa-services.md    # 常见服务对比速查
