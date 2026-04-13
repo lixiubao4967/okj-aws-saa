@@ -52,8 +52,8 @@ SAA-C03 (约 8-12 周)  →  SAP-C02 (约 8-12 周)
 #### Week 4：存储服务 ✅
 - [x] S3：存储类型、生命周期策略、跨区复制（CRR/SRR）
 - [x] S3 安全：Bucket Policy、ACL、Pre-signed URL、SSE-S3/KMS/C
-- [ ] EFS vs EBS vs S3 使用场景对比
-- [ ] Storage Gateway、Snowball/Snowcone/Snowmobile
+- [x] EFS vs EBS vs S3 使用场景对比
+- [x] Storage Gateway、Snowball/Snowcone/Snowmobile
 
 #### Week 5：数据库服务
 - [ ] RDS：Multi-AZ vs Read Replica、备份与恢复

@@ -1,4 +1,4 @@
-# Week 4：S3 存储 + 安全
+# Week 4：存储服务
 
 ## 1. S3 存储类型
 
@@ -95,3 +95,73 @@ IAM Policy（用户侧）+ Bucket Policy（资源侧）+ ACL 综合评估：
 - 桶 Policy 可设为"只允许通过 Access Point 访问"，防止绕过
 
 **选型：** 2-3 个简单规则用 Bucket Policy；团队多/策略复杂用 Access Points
+
+---
+
+## 9. EFS vs EBS vs S3 对比
+
+| 特性 | EBS | EFS | S3 |
+|------|-----|-----|-----|
+| 类型 | 块存储 (Block) | 文件存储 (File) | 对象存储 (Object) |
+| 访问方式 | 挂载到单个 EC2（同 AZ） | 挂载到多个 EC2（跨 AZ） | HTTP API |
+| 协议 | 设备级别 | NFS v4.1 | REST API |
+| 容量 | 创建时指定，手动扩容 | 自动伸缩，按用量付费 | 无限 |
+| 性能 | 最高（io2 可达 64,000 IOPS） | 中等 | 取决于请求模式 |
+| 持久性 | 单 AZ（快照可跨 AZ） | 跨多 AZ 冗余 | 11 个 9 |
+| 典型场景 | 数据库、OS 启动盘 | 共享文件系统、CMS | 静态资源、备份、数据湖 |
+
+**考试关键词映射：**
+- "shared storage" / 多实例共享 → **EFS**
+- "database" / "boot volume" / 高 IOPS → **EBS**
+- "static assets" / "backup" / "data lake" → **S3**
+- "Windows 文件共享" → **FSx for Windows**（EFS 只支持 Linux/NFS）
+
+**易混点：**
+- EBS Multi-Attach（io1/io2）只支持同一 AZ 内最多 16 个实例，跨 AZ 共享一定选 EFS
+- EFS 也有存储分层：Standard / Standard-IA / One Zone / One Zone-IA，可配生命周期策略
+- S3 不能被挂载为文件系统，不能替代 EFS 的共享文件场景
+
+---
+
+## 10. Storage Gateway — 混合云存储桥梁
+
+在本地部署网关（VM/硬件），让本地应用透明访问 AWS 云存储。
+
+| 类型 | 协议 | 数据存储位置 | 典型场景 |
+|------|------|-------------|---------|
+| S3 File Gateway | NFS / SMB | S3 | 本地应用以文件方式读写，实际存到 S3 |
+| FSx File Gateway | SMB | FSx for Windows | Windows 文件共享上云，本地缓存加速 |
+| Volume Gateway | iSCSI | S3（EBS 快照） | 本地块存储备份到云端 |
+| Tape Gateway | iSCSI VTL | S3 Glacier | 替代物理磁带库，归档到 Glacier |
+
+**Volume Gateway 两种模式：**
+- **Cached Mode**：主数据在 S3，本地只缓存热数据 → "minimize on-premises storage"
+- **Stored Mode**：主数据在本地，异步备份到 S3 → "low-latency access to full dataset"
+
+---
+
+## 11. Snow 系列 — 大规模离线数据迁移
+
+| 设备 | 容量 | 特点 | 典型场景 |
+|------|------|------|---------|
+| Snowcone | 8TB HDD / 14TB SSD | 最小，可手提 | 边缘采集、小规模迁移 |
+| Snowball Edge Storage | 80TB | 存储优化 | 中大规模数据迁移 |
+| Snowball Edge Compute | 42TB | 可跑 EC2 和 Lambda | 边缘计算 + 数据迁移 |
+| Snowmobile | 100PB（集装箱卡车） | 超大规模 | 数据中心级别迁移 |
+
+**容量选择逻辑：**
+- < 10TB → 走网络（Direct Connect / VPN / DataSync）
+- 10TB ~ 数十PB → Snowball Edge（可订多台并行）
+- \> 10PB 且时间紧 → Snowmobile
+
+**迁移工具速查：**
+
+| 场景 | 方案 |
+|------|------|
+| 本地 NFS/SMB 文件上云 | S3 File Gateway |
+| Windows 文件共享 | FSx File Gateway |
+| 本地块存储备份 | Volume Gateway |
+| 替代磁带备份 | Tape Gateway |
+| 大量数据物理搬运 | Snowball Edge |
+| 无网络边缘计算 | Snowball Edge Compute |
+| 持续在线文件同步 | DataSync |
