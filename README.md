@@ -55,9 +55,9 @@ SAA-C03 (约 8-12 周)  →  SAP-C02 (约 8-12 周)
 - [x] EFS vs EBS vs S3 使用场景对比
 - [x] Storage Gateway、Snowball/Snowcone/Snowmobile
 
-#### Week 5：数据库服务
-- [ ] RDS：Multi-AZ vs Read Replica、备份与恢复
-- [ ] Aurora：全局数据库、Serverless、Aurora vs RDS
+#### Week 5：数据库服务（进行中）
+- [x] RDS：Multi-AZ vs Read Replica、备份与恢复
+- [x] Aurora：全局数据库、Serverless、Aurora vs RDS
 - [ ] DynamoDB：分区键、排序键、索引（GSI/LSI）、DAX、TTL
 - [ ] ElastiCache：Redis vs Memcached
 - [ ] Redshift、Athena、Glue 简介
@@ -164,14 +164,16 @@ okj-aws-saa/
 │   ├── saa/               # SAA-C03 知识点笔记
 │   │   ├── 01-aws-basics-ec2.md
 │   │   ├── 02-high-availability-lb.md
-│   │   └── 03-s3-storage-security.md
+│   │   ├── 03-s3-storage-security.md
+│   │   └── 04-database-rds-aurora.md
 │   └── sap/               # SAP-C02 进阶笔记
 │       ├── 01-organizations.md
 │       ├── 02-hybrid-network.md
 │       └── 03-migration.md
 ├── practice/
 │   ├── saa/               # SAA 错题本 + 模拟记录
-│   │   └── 01-week1-2-errors.md
+│   │   ├── 01-week1-2-errors.md
+│   │   └── 02-week5-errors.md
 │   └── sap/               # SAP 错题本 + 模拟记录
 └── cheatsheets/           # 考前速查表
     ├── saa-services.md    # 常见服务对比速查
