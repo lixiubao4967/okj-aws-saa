@@ -25,13 +25,26 @@ SAA-C03 (约 8-12 周)  →  SAP-C02 (约 8-12 周)
 | 考试费用 | $150 USD（日本约 ¥20,000 + 税） |
 | 有效期 | 3 年 |
 | 考试方式 | Pearson VUE 考场 / OnVUE 在线监考 |
-| **考试日期** | **2026-09-26（周六）** |
 
-### 报名要点
+### ✅ 已报名（Status: Scheduled）
+
+| 项目 | 内容 |
+|------|------|
+| **日期时间** | **2026-09-26（土）11:30 – 14:20 JST** |
+| 考场 | Shinbashi Kokukaikan Test Center 2（東京都港区新橋 1-18-1 国際会館 2F, 105-0004） |
+| 语言 | English |
+| 时长 | **170 分钟**（130 + ESL 延时 30 + 流程时间） |
+| 便利 | ESL Extra Time 30 Minutes（Approved，永久有效，SAP-C02 也自动生效） |
+| 费用 | JPY 22,000（¥20,000 + 税），考过后公司报销 |
+
+> Order # / Registration ID 见确认邮件，不记录在此仓库。
+
+### 报名要点（备忘，供 SAP-C02 复用）
 
 1. https://aws.amazon.com/certification/ → **AWS Certification Account**（AWS Builder ID 登录）→ Schedule an Exam → Pearson VUE
-2. **先申请 ESL +30 分钟延时，再订考位** —— 英文卷且英语非母语可免费申请（130 → 160 分钟），必须在预约前于 accommodations 里提交
+2. **先申请 ESL +30 分钟延时，再订考位** —— 英文卷且英语非母语可免费申请（130 → 160 分钟），必须在预约前于 Exam accommodations 里提交。已申请过，SAP 时不用再申请
 3. 改期政策：考前 24h 以上免费改期，**每个考位最多改 2 次**；24h 内不可改期不可退款
+4. CertMetrics 里的 First/Last Name 必须和证件罗马字一致（大小写不影响，姓名归属要正确）
 
 ### SAA-C03 考试域分布
 
@@ -211,7 +224,7 @@ okj-aws-saa/
 ## 进度追踪
 
 - [x] SAA-C03 学习中（Week 1-4 完成，Week 5 进行中 → 转入 9 月冲刺日历）
-- [ ] SAA-C03 报名（目标考期 **2026-09-26**，待在 Pearson VUE 下单）
+- [x] SAA-C03 报名 ✅ 已预约 **2026-09-26（土）11:30 JST**，新桥国际会馆考场
 - [ ] SAA-C03 模拟题通过率 > 80%
 - [ ] SAA-C03 通过
 - [ ] SAP-C02 学习中
