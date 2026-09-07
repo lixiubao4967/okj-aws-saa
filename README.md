@@ -62,7 +62,7 @@ SAA-C03 (约 8-12 周)  →  SAP-C02 (约 8-12 周)
 
 | 阶段 | 日期 | 内容 | 对应原计划 |
 |------|------|------|-----------|
-| **P1 补完数据库** | 9/3(木) – 9/6(日) | ✅ DynamoDB（分区键/GSI/LSI/DAX/TTL/容量模式）测验 5/6<br>🔸 ElastiCache Redis vs Memcached（内容已过，**测验待做**）<br>⬜ Redshift/Athena/Glue 速览 → **顺延到 9/7 早上** | Week 5 剩余 |
+| **P1 补完数据库** | 9/3(木) – 9/7(月) | ✅ DynamoDB（分区键/GSI/LSI/DAX/TTL/容量模式）测验 5/6<br>✅ ElastiCache Redis vs Memcached 测验 **5/5**<br>🔸 Redshift/Athena/Glue 速览（内容已过，**测验待做**） | Week 5 剩余 |
 | **P2 网络（最高频）** | 9/7(月) – 9/11(金) | 9/7-9/9 VPC 核心：子网、路由表、IGW、NAT GW、SG vs NACL<br>9/10-9/11 VPC 互联：Peering、Transit Gateway、VPN、Direct Connect、VPC Endpoints | Week 6 |
 | **P3 无服务器 + 集成** | 9/12(土) – 9/14(月) | Lambda（并发/Layers/Edge）、SQS 标准 vs FIFO + DLQ、SNS 扇出、EventBridge、Step Functions、API Gateway、Kinesis 三兄弟 | Week 7 |
 | **P4 安全 + 监控** | 9/15(火) – 9/17(木) | KMS/CMK/跨账户加密、Secrets Manager vs Parameter Store、CloudTrail、CloudWatch、Config、WAF/Shield/GuardDuty/Inspector/Macie | Week 8 |
@@ -73,11 +73,14 @@ SAA-C03 (约 8-12 周)  →  SAP-C02 (约 8-12 周)
 
 **决策关卡：9/20 —— 若模拟卷① 正确率 < 70%，免费改期到 10/3（周六）。**
 
-### 📍 下次从这里开始（更新于 2026-09-06 深夜）
+### 📍 下次从这里开始（更新于 2026-09-07）
 
-1. **做 `notes/saa/06-elasticache.md` 末尾的 5 题测验**（内容昨天已过完，直接答题）
-2. Redshift / Athena / Glue 速览 → 补完 P1
-3. 进入 **P2 网络（9/7 – 9/11）**，VPC 是全考试最高频领域
+1. **做 `notes/saa/07-analytics.md` 末尾的 5 题测验**（Redshift/Athena/Glue 内容已过完，直接答题）→ P1 正式收工
+2. 进入 **P2 网络（9/7 – 9/11）**，VPC 是全考试最高频领域
+   - 9/7-9/9 VPC 核心：子网、路由表、IGW、NAT GW、SG vs NACL
+   - 9/10-9/11 VPC 互联：Peering、TGW、VPN、Direct Connect、VPC Endpoints
+
+**今日（9/7）完成**：ElastiCache 重讲 + 测验 5/5 ✅ ｜ Redshift/Athena/Glue 速览（测验待做）
 
 > ⚠️ 个人薄弱点提醒：**计算题必须写出三步，不要心算**（详见 `practice/saa/02-week5-errors.md` 错题 4）
 
@@ -106,8 +109,8 @@ SAA-C03 (约 8-12 周)  →  SAP-C02 (约 8-12 周)
 - [x] RDS：Multi-AZ vs Read Replica、备份与恢复
 - [x] Aurora：全局数据库、Serverless、Aurora vs RDS
 - [x] DynamoDB：分区键、排序键、索引（GSI/LSI）、DAX、TTL、RCU/WCU 计算
-- [~] ElastiCache：Redis vs Memcached（笔记已写，**测验待做**）
-- [ ] Redshift、Athena、Glue 简介
+- [x] ElastiCache：Redis vs Memcached、集群模式、缓存策略（测验 5/5）
+- [~] Redshift、Athena、Glue 简介（笔记已写，**测验待做**）
 
 #### Week 6：网络服务
 - [ ] VPC：子网（公/私）、路由表、Internet Gateway、NAT Gateway
@@ -214,7 +217,8 @@ okj-aws-saa/
 │   │   ├── 03-s3-storage-security.md
 │   │   ├── 04-database-rds-aurora.md
 │   │   ├── 05-dynamodb.md
-│   │   └── 06-elasticache.md
+│   │   ├── 06-elasticache.md
+│   │   └── 07-analytics.md    # Redshift/Athena/Glue
 │   └── sap/               # SAP-C02 进阶笔记
 │       ├── 01-organizations.md
 │       ├── 02-hybrid-network.md

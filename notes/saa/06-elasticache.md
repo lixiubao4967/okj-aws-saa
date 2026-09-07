@@ -1,8 +1,7 @@
 # Week 5：数据库服务 — ElastiCache
 
-> 学习日期：2026-09-06（P1）
-> ⏳ **状态：内容已过，随堂测验未做 → 明天先做测验再往下走**
-> 测验题在本文件末尾「待完成测验」一节。
+> 学习日期：2026-09-06（内容）+ 2026-09-07（重讲 + 测验）
+> ✅ **状态：完成。随堂测验 5/6 → 5/5 全对**（测验与解析见文末）
 
 ## 1. 定位
 
@@ -82,7 +81,29 @@
 
 ---
 
-## 5. 待完成测验（明天先做这 5 题）
+## 5. 划清「其他缓存类服务」的边界（场景题真正考点）
+
+四个服务都叫缓存，但**位置完全不同**：
+
+| 服务 | 缓存什么 | 放在哪 | 改代码？ |
+|---|---|---|---|
+| **CloudFront** | 静态/动态 HTTP 响应 | 全球边缘节点，**离用户最近** | 不用 |
+| **ElastiCache** | 任意应用数据（DB 查询结果、session） | VPC 内，应用与 DB 之间 | **要** |
+| **DAX** | **仅** DynamoDB 的 item/query | DynamoDB 前面（透明代理） | 不用（换 endpoint） |
+| **RDS 读副本** | 不是缓存，是完整库拷贝 | — | 要改读写分离 |
+
+排除法：
+- 「加速静态图片」→ CloudFront（ElastiCache 在 VPC 里，用户够不着）
+- 「DynamoDB 微秒级 + 不改代码」→ DAX
+- 「Aurora 已有 3 个读副本仍扛不住重复查询」→ ElastiCache
+
+> 💰 成本：ElastiCache 支持 **Reserved Nodes**，题干问「长期运行缓存集群如何降本」→ 预留节点（同 EC2 RI 逻辑）。
+
+---
+
+## 6. 随堂测验（2026-09-07 完成，5/5 ✅）
+
+**答案：1-B　2-C　3-B　4-B　5-C**
 
 **Q1.** 手游需要实时全球排行榜，展示 Top 100 玩家分数，毫秒内更新和查询。
 A) DynamoDB + GSI　B) ElastiCache Redis（Sorted Set）　C) ElastiCache Memcached　D) RDS + 读副本
@@ -99,5 +120,17 @@ A) Lazy Loading　B) Write-Through　C) 只设 TTL　D) Parallel Scan
 
 **Q5.** 电商缓存数据集已超过单个 Redis 节点内存上限，写入吞吐也成瓶颈。
 A) 升级更大节点　B) 增加 Read Replica　C) 启用 Redis Cluster Mode Enabled（分片）　D) 换 Memcached
+
+### 解析（易错点）
+
+| 题 | 答案 | 关键判断信号 | 干扰项为什么错 |
+|---|---|---|---|
+| Q1 | B | `Top 100 + 实时排名` = Sorted Set 原生能力 | DynamoDB+GSI 能存分数但排序要自己算，做不到毫秒 Top-N |
+| Q2 | C | `用户不掉线` = 需要**自动故障转移** | B 的 Cluster Mode 解决容量/写吞吐，不是 HA；D 快照是**恢复**手段，恢复期间用户已掉线 |
+| Q3 | B | `不改代码` + `微秒级` + `DynamoDB` 三信号 | ElastiCache 必须自己写 cache-aside 逻辑 |
+| Q4 | B | `绝对不能陈旧` = Write-Through | TTL 只缩短陈旧窗口，不能消除 |
+| Q5 | C | 同时命中**容量超限 + 写吞吐瓶颈** | 读副本是完整拷贝，省不了内存；升级机型迟早再撞墙 |
+
+> ⚠️ **Q2 / Q5 是最易翻车的两题**，核心分界：**副本扩读、分片扩写+扩容量**。
 </content>
 </invoke>
