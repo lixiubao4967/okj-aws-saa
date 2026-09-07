@@ -63,7 +63,7 @@ SAA-C03 (约 8-12 周)  →  SAP-C02 (约 8-12 周)
 | 阶段 | 日期 | 内容 | 对应原计划 |
 |------|------|------|-----------|
 | **P1 补完数据库** ✅ | 9/3(木) – 9/7(月) | ✅ DynamoDB（分区键/GSI/LSI/DAX/TTL/容量模式）测验 5/6<br>✅ ElastiCache Redis vs Memcached 测验 **5/5**<br>✅ Redshift/Athena/Glue 测验 0/5 🚨 → 错题精读 → **重测 4/5** | Week 5 剩余 |
-| **P2 网络（最高频）** | 9/7(月) – 9/11(金) | 🔸 9/7 VPC 核心内容已讲完：CIDR/子网/路由表/IGW/NAT GW/SG vs NACL（笔记 `08-vpc-core.md`，**10 题测验待做**）<br>9/8-9/9 测验 + 巩固<br>9/10-9/11 VPC 互联：Peering、Transit Gateway、VPN、Direct Connect、VPC Endpoints | Week 6 |
+| **P2 网络（最高频）** | 9/7(月) – 9/11(金) | ✅ 9/7 VPC 核心：CIDR/子网/路由表/IGW/NAT GW/SG vs NACL — 测验 **9/10**（笔记 `08-vpc-core.md`）<br>🔸 9/8 VPC 互联：Peering/TGW/VPN/DX/Endpoints 内容已讲完（笔记 `09-vpc-connectivity.md`，**10 题测验待做**）<br>➡️ **进度超前 2 天** | Week 6 |
 | **P3 无服务器 + 集成** | 9/12(土) – 9/14(月) | Lambda（并发/Layers/Edge）、SQS 标准 vs FIFO + DLQ、SNS 扇出、EventBridge、Step Functions、API Gateway、Kinesis 三兄弟 | Week 7 |
 | **P4 安全 + 监控** | 9/15(火) – 9/17(木) | KMS/CMK/跨账户加密、Secrets Manager vs Parameter Store、CloudTrail、CloudWatch、Config、WAF/Shield/GuardDuty/Inspector/Macie | Week 8 |
 | **P5 容器 + IaC + 成本** | 9/18(金) | ECS vs EKS vs Fargate、ECR、CloudFormation、Beanstalk、Cost Explorer/Budgets/Savings Plans | Week 9 |
@@ -73,12 +73,15 @@ SAA-C03 (约 8-12 周)  →  SAP-C02 (约 8-12 周)
 
 **决策关卡：9/20 —— 若模拟卷① 正确率 < 70%，免费改期到 10/3（周六）。**
 
-### 📍 下次从这里开始（更新于 2026-09-07）
+### 📍 下次从这里开始（更新于 2026-09-08）
 
-1. **做 `notes/saa/08-vpc-core.md` 末尾的 10 题测验**（VPC 核心内容已讲完）
-2. 然后 **9/10-9/11 VPC 互联**：Peering、TGW、VPN、Direct Connect、VPC Endpoints
+1. **做 `notes/saa/09-vpc-connectivity.md` 末尾的 10 题测验**（VPC 互联内容已讲完）→ P2 收工
+2. 提前进入 **P3 无服务器 + 集成**（原定 9/12）：Lambda、SQS、SNS、EventBridge、Step Functions、API Gateway
 
-**今日（9/7）完成**：ElastiCache 5/5 ✅ ｜ 分析服务 0/5 → 错题精读 → 重测 **4/5** ✅ P1 收工 ｜ **VPC 核心内容已讲完**（笔记 `08-vpc-core.md`，测验待做）
+**9/7 完成**：ElastiCache 5/5 ✅ ｜ 分析服务 0/5 → 错题精读 → 重测 **4/5** ✅ P1 收工 ｜ VPC 核心讲完
+**9/8 完成**：VPC 核心测验 **9/10** ✅（错题 11：NACL 出站临时端口）｜ **VPC 互联内容已讲完**（测验待做）
+
+> ➡️ **当前进度超前原计划约 2 天**，多出的时间全部并入 P6 模拟题冲刺。
 
 > ⚠️ 个人薄弱点提醒
 > 1. **计算题必须写出三步，不要心算**（错题 4）
@@ -114,10 +117,10 @@ SAA-C03 (约 8-12 周)  →  SAP-C02 (约 8-12 周)
 - [x] Redshift、Athena、Glue 简介（测验 0/5 → 错题精读 → 重测 **4/5**）
 
 #### Week 6：网络服务（进行中）
-- [~] VPC：子网（公/私）、路由表、Internet Gateway、NAT Gateway（笔记已写，测验待做）
-- [~] Security Group vs NACL（笔记已写，测验待做）
-- [ ] VPC Peering、Transit Gateway、VPN、Direct Connect
-- [ ] VPC Endpoints（Gateway/Interface）
+- [x] VPC：子网（公/私）、路由表、Internet Gateway、NAT Gateway（测验 9/10）
+- [x] Security Group vs NACL（测验 9/10）
+- [~] VPC Peering、Transit Gateway、VPN、Direct Connect（笔记已写，测验待做）
+- [~] VPC Endpoints（Gateway/Interface）+ PrivateLink（笔记已写，测验待做）
 
 #### Week 7：应用集成 + 无服务器
 - [ ] Lambda：触发器、并发、层（Layers）、边缘函数
@@ -220,7 +223,8 @@ okj-aws-saa/
 │   │   ├── 05-dynamodb.md
 │   │   ├── 06-elasticache.md
 │   │   ├── 07-analytics.md    # Redshift/Athena/Glue
-│   │   └── 08-vpc-core.md     # VPC/子网/路由表/IGW/NAT/SG vs NACL
+│   │   ├── 08-vpc-core.md     # VPC/子网/路由表/IGW/NAT/SG vs NACL
+│   │   └── 09-vpc-connectivity.md  # Peering/TGW/VPN/DX/Endpoints
 │   └── sap/               # SAP-C02 进阶笔记
 │       ├── 01-organizations.md
 │       ├── 02-hybrid-network.md
@@ -228,7 +232,8 @@ okj-aws-saa/
 ├── practice/
 │   ├── saa/               # SAA 错题本 + 模拟记录
 │   │   ├── 01-week1-2-errors.md
-│   │   └── 02-week5-errors.md
+│   │   ├── 02-week5-errors.md
+│   │   └── 03-vpc-errors.md
 │   └── sap/               # SAP 错题本 + 模拟记录
 └── cheatsheets/           # 考前速查表
     ├── saa-services.md    # 常见服务对比速查
