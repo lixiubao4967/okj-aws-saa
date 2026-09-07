@@ -6,7 +6,9 @@
 |------|------|------|
 | — | Aurora | 2/5（40%） |
 | 2026-09-06 | DynamoDB | **5/6（83%）** ⬆️ |
-| 待做 | ElastiCache | — |
+| 2026-09-07 | ElastiCache | **5/5（100%）** ⬆️ |
+| 2026-09-07 | 分析服务（Redshift/Athena/Glue） | **0/5（0%）** 🚨 |
+| 2026-09-07 | 分析服务 **重测** | 待做 |
 
 ---
 
@@ -116,3 +118,118 @@
 | **计算题步骤跳步** | — | ❌ **新暴露** |
 
 > **下轮重点：遇到计算题一律写出三步，不心算。**
+
+---
+
+# 分析服务练习：0/5（0%）— 2026-09-07 🚨
+
+答错：全部（Athena/Redshift 选型、Athena 降本、Spectrum、Glue Catalog、DynamoDB 能力边界）
+
+> 与 ElastiCache 5/5 落差极大。**性质和前两轮不同**：前两轮是审题/方法问题，这轮是**服务能力边界记错**（知识空洞）。
+
+## 错题 5：Athena vs Redshift 选型
+
+**场景：** S3 存 5 年 ALB 日志，安全团队**偶尔**用 SQL 临时排查，要求**运维开销最小**
+
+**我的答案：** A) 导入 Redshift　**正确答案：** B) Athena
+
+### 错因
+选了预置集群方案。Redshift 要选节点、管容量、7×24 付费，为「偶尔查」养集群是运维+成本双输。
+
+### 要点
+🔑 **Athena vs Redshift 唯一分水岭 = 查询频率**
+- 偶尔 / ad-hoc / 临时排查 → **Athena**（Serverless，零运维）
+- 持续 / 日常报表 / BI → **Redshift**
+
+---
+
+## 错题 6：Athena 成本优化
+
+**场景：** Athena 查 S3 日志成本过高，最有效优化？
+
+**我的答案：** D) S3 Transfer Acceleration　**正确答案：** B) 转 Parquet + 压缩
+
+### 错因
+把「传输加速」当成了「查询降本」。Transfer Acceleration 是走 CloudFront 边缘解决**跨洲上传/下载慢**，和扫描量无关，一分钱不省。
+
+### 要点
+```
+Athena 费用 = 扫描的数据量 × $5/TB
+```
+不按时间、不按实例、不按次数 —— **只按扫了多少字节**。降本三招（让它少扫）：
+1. **列式格式** Parquet / ORC —— 只读用到的列，省 30–90%
+2. **压缩** Snappy / gzip
+3. **分区** 按 year/month/day 建前缀
+
+---
+
+## 错题 7：Redshift Spectrum
+
+**场景：** **已有 Redshift 集群**，要偶尔关联查询 S3 归档数据，**不想加载进集群**
+
+**我的答案：** C) Athena 联邦查询　**正确答案：** A) Redshift Spectrum
+
+### 错因 —— 概念性误解
+| | 干什么 |
+|---|---|
+| **Athena 查 S3** | Athena 的**本职工作**，不叫联邦查询 |
+| **Athena Federated Query** | 查 **S3 以外**的源：RDS / DynamoDB / Redshift / CloudWatch Logs（靠 Lambda 连接器） |
+
+「联邦查询查 S3」这个说法本身不成立。
+
+### 要点
+- 题干「已有 Redshift」+「不加载进集群」同时出现 = **Spectrum** 标准题面
+- Spectrum 能让 S3 数据和**集群内表做 join**，且不引入新工具
+
+---
+
+## 错题 8：Glue Crawler + Data Catalog
+
+**场景：** S3 大量**结构未知**的 JSON，需**自动识别 schema** 让 Athena 直接查
+
+**我的答案：** D) DynamoDB 存元数据　**正确答案：** B) Glue Crawler + Data Catalog
+
+### 错因
+不知道 **Glue Data Catalog 就是 Athena 的元数据存储**（写死的集成）。自建 DynamoDB 元数据表，Athena 根本不认。
+
+### 要点
+```
+Glue Crawler 扫 S3 → 推断 schema → 写入 Glue Data Catalog
+                                          ↓
+                    Athena / Redshift Spectrum / EMR 直接当表查
+```
+- 信号词 `结构未知` + `自动识别 schema` → **Crawler**（唯一存在理由）
+- 手写 DDL 能 work 但不选：凡「自动」对「手动」，选自动
+
+---
+
+## 错题 9：Redshift = 唯一的数据仓库答案
+
+**场景：** 数据仓库跑 PB 级复杂 join 销售分析 + 业务方看可视化看板
+
+**我的答案：** B) DynamoDB + Athena　**正确答案：** C) Redshift + QuickSight
+
+### 错因 —— 方向性错误
+**DynamoDB 不能做 join。** 它是 NoSQL 键值/文档库，为「已知 key 的毫秒级单点读写」设计：无 join、无聚合、不做 OLAP。当数据仓库用是根本性误解。
+
+### 要点
+🔑 **Redshift 是 SAA 里唯一的「数据仓库 / OLAP」答案**
+看到这些词直接锁定，不犹豫：
+`data warehouse`、`complex join`、`PB scale analytics`、`BI reporting`、`OLAP`
+
+配套：可视化看板 → **QuickSight**
+
+---
+
+## 三轮毛病对比（更新）
+
+| 毛病 | Aurora 轮 | DynamoDB 轮 | ElastiCache 轮 | 分析服务轮 |
+|------|-----------|-------------|----------------|-----------|
+| 得分 | 2/5 | 5/6 | **5/5** | **0/5** 🚨 |
+| 过度设计 | ❌ 错 2 题 | ✅ 已改正 | ✅ | — |
+| 漏读约束关键词 | ❌ 错 1 题 | ✅ 已改正 | ✅ | ❌ Q1 漏「偶尔」 |
+| 计算题跳步 | — | ❌ 新暴露 | — | — |
+| **服务能力边界记错** | — | — | — | ❌ **新暴露（Q3/Q4/Q5）** |
+
+> **结论：** 前几轮是方法问题（靠技巧补），这轮是知识空洞（只能重记）。
+> 分析服务在 SAA 占比低（约 1–3 题）且题型极固定 —— 背死关键词映射表即可满分，**投入不超过 30 分钟**。
