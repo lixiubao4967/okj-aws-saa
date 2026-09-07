@@ -62,8 +62,8 @@ SAA-C03 (约 8-12 周)  →  SAP-C02 (约 8-12 周)
 
 | 阶段 | 日期 | 内容 | 对应原计划 |
 |------|------|------|-----------|
-| **P1 补完数据库** | 9/3(木) – 9/7(月) | ✅ DynamoDB（分区键/GSI/LSI/DAX/TTL/容量模式）测验 5/6<br>✅ ElastiCache Redis vs Memcached 测验 **5/5**<br>🚨 Redshift/Athena/Glue 测验 **0/5** → 已精读错题，**待重测 5 题** | Week 5 剩余 |
-| **P2 网络（最高频）** | 9/7(月) – 9/11(金) | 9/7-9/9 VPC 核心：子网、路由表、IGW、NAT GW、SG vs NACL<br>9/10-9/11 VPC 互联：Peering、Transit Gateway、VPN、Direct Connect、VPC Endpoints | Week 6 |
+| **P1 补完数据库** ✅ | 9/3(木) – 9/7(月) | ✅ DynamoDB（分区键/GSI/LSI/DAX/TTL/容量模式）测验 5/6<br>✅ ElastiCache Redis vs Memcached 测验 **5/5**<br>✅ Redshift/Athena/Glue 测验 0/5 🚨 → 错题精读 → **重测 4/5** | Week 5 剩余 |
+| **P2 网络（最高频）** | 9/7(月) – 9/11(金) | 🔸 9/7 VPC 核心内容已讲完：CIDR/子网/路由表/IGW/NAT GW/SG vs NACL（笔记 `08-vpc-core.md`，**10 题测验待做**）<br>9/8-9/9 测验 + 巩固<br>9/10-9/11 VPC 互联：Peering、Transit Gateway、VPN、Direct Connect、VPC Endpoints | Week 6 |
 | **P3 无服务器 + 集成** | 9/12(土) – 9/14(月) | Lambda（并发/Layers/Edge）、SQS 标准 vs FIFO + DLQ、SNS 扇出、EventBridge、Step Functions、API Gateway、Kinesis 三兄弟 | Week 7 |
 | **P4 安全 + 监控** | 9/15(火) – 9/17(木) | KMS/CMK/跨账户加密、Secrets Manager vs Parameter Store、CloudTrail、CloudWatch、Config、WAF/Shield/GuardDuty/Inspector/Macie | Week 8 |
 | **P5 容器 + IaC + 成本** | 9/18(金) | ECS vs EKS vs Fargate、ECR、CloudFormation、Beanstalk、Cost Explorer/Budgets/Savings Plans | Week 9 |
@@ -75,16 +75,15 @@ SAA-C03 (约 8-12 周)  →  SAP-C02 (约 8-12 周)
 
 ### 📍 下次从这里开始（更新于 2026-09-07）
 
-1. **分析服务重测 5 题**（上轮 0/5，错题已精读 → `practice/saa/02-week5-errors.md` 错题 5-9）→ P1 收工
-2. 进入 **P2 网络（9/7 – 9/11）**，VPC 是全考试最高频领域
-   - 9/7-9/9 VPC 核心：子网、路由表、IGW、NAT GW、SG vs NACL
-   - 9/10-9/11 VPC 互联：Peering、TGW、VPN、Direct Connect、VPC Endpoints
+1. **做 `notes/saa/08-vpc-core.md` 末尾的 10 题测验**（VPC 核心内容已讲完）
+2. 然后 **9/10-9/11 VPC 互联**：Peering、TGW、VPN、Direct Connect、VPC Endpoints
 
-**今日（9/7）完成**：ElastiCache 测验 5/5 ✅ ｜ 分析服务测验 **0/5** 🚨 + 5 题错题精读
+**今日（9/7）完成**：ElastiCache 5/5 ✅ ｜ 分析服务 0/5 → 错题精读 → 重测 **4/5** ✅ P1 收工 ｜ **VPC 核心内容已讲完**（笔记 `08-vpc-core.md`，测验待做）
 
 > ⚠️ 个人薄弱点提醒
 > 1. **计算题必须写出三步，不要心算**（错题 4）
-> 2. **服务能力边界要记准** —— 新暴露：Athena 联邦查询的用途、Glue Catalog 归谁用、DynamoDB 不能 join（错题 7-9）
+> 2. **服务能力边界要记准** —— 已暴露：Athena 联邦查询的用途、Glue Catalog 归谁用、DynamoDB 不能 join、KDS vs Firehose（错题 7-10）
+> 3. 解题通法：先圈**频率词**（偶尔/持续/实时/每天）+ **约束词**（成本/运维/无代码）。两选项都「技术可行」时，判据是约束词
 
 ### 10 周学习计划（原始版本，供对照）
 
@@ -112,11 +111,11 @@ SAA-C03 (约 8-12 周)  →  SAP-C02 (约 8-12 周)
 - [x] Aurora：全局数据库、Serverless、Aurora vs RDS
 - [x] DynamoDB：分区键、排序键、索引（GSI/LSI）、DAX、TTL、RCU/WCU 计算
 - [x] ElastiCache：Redis vs Memcached、集群模式、缓存策略（测验 5/5）
-- [~] Redshift、Athena、Glue 简介（笔记已写，测验 **0/5** → 错题已精读，待重测）
+- [x] Redshift、Athena、Glue 简介（测验 0/5 → 错题精读 → 重测 **4/5**）
 
-#### Week 6：网络服务
-- [ ] VPC：子网（公/私）、路由表、Internet Gateway、NAT Gateway
-- [ ] Security Group vs NACL
+#### Week 6：网络服务（进行中）
+- [~] VPC：子网（公/私）、路由表、Internet Gateway、NAT Gateway（笔记已写，测验待做）
+- [~] Security Group vs NACL（笔记已写，测验待做）
 - [ ] VPC Peering、Transit Gateway、VPN、Direct Connect
 - [ ] VPC Endpoints（Gateway/Interface）
 
@@ -220,7 +219,8 @@ okj-aws-saa/
 │   │   ├── 04-database-rds-aurora.md
 │   │   ├── 05-dynamodb.md
 │   │   ├── 06-elasticache.md
-│   │   └── 07-analytics.md    # Redshift/Athena/Glue
+│   │   ├── 07-analytics.md    # Redshift/Athena/Glue
+│   │   └── 08-vpc-core.md     # VPC/子网/路由表/IGW/NAT/SG vs NACL
 │   └── sap/               # SAP-C02 进阶笔记
 │       ├── 01-organizations.md
 │       ├── 02-hybrid-network.md
@@ -239,7 +239,7 @@ okj-aws-saa/
 
 ## 进度追踪
 
-- [x] SAA-C03 学习中（Week 1-4 完成，Week 5 进行中 → 转入 9 月冲刺日历）
+- [x] SAA-C03 学习中（Week 1-5 完成 = P1 收工；**P2 网络进行中**）
 - [x] SAA-C03 报名 ✅ 已预约 **2026-09-26（土）11:30 JST**，新桥国际会馆考场
 - [ ] SAA-C03 模拟题通过率 > 80%
 - [ ] SAA-C03 通过

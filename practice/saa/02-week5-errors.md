@@ -8,7 +8,7 @@
 | 2026-09-06 | DynamoDB | **5/6（83%）** ⬆️ |
 | 2026-09-07 | ElastiCache | **5/5（100%）** ⬆️ |
 | 2026-09-07 | 分析服务（Redshift/Athena/Glue） | **0/5（0%）** 🚨 |
-| 2026-09-07 | 分析服务 **重测** | 待做 |
+| 2026-09-07 | 分析服务 **重测** | **4/5（80%）** ⬆️ P1 收工 |
 
 ---
 
@@ -233,3 +233,56 @@ Glue Crawler 扫 S3 → 推断 schema → 写入 Glue Data Catalog
 
 > **结论：** 前几轮是方法问题（靠技巧补），这轮是知识空洞（只能重记）。
 > 分析服务在 SAA 占比低（约 1–3 题）且题型极固定 —— 背死关键词映射表即可满分，**投入不超过 30 分钟**。
+
+---
+
+# 分析服务重测：4/5（80%）— 2026-09-07 ✅ P1 收工
+
+答对：EMR（自定义 Spark）、Athena 分区降本、QuickSight、Glue ETL（调度化 ETL 优于 Athena CTAS）
+答错：KDS vs Firehose
+
+## 错题 10：Kinesis Data Streams vs Firehose
+
+**场景：** IoT 流数据**近实时**持续写入 S3，要求**全托管、免运维、无需写代码**
+
+**我的答案：** A) KDS + 自建消费者　**正确答案：** B) Kinesis Data Firehose
+
+### 错因
+KDS 只负责**存流数据**，它不会自己往 S3 写 —— 需要自己写消费者程序，处理批量/重试/分区/失败落盘。题干「无需写代码 + 免运维」全部违反。
+
+### 要点
+
+| | Kinesis Data Streams | Kinesis Data Firehose |
+|---|---|---|
+| 定位 | 流数据**存储/管道** | 流数据**投递（ETL 搬运工）** |
+| 消费者 | **自己写** | **AWS 托管**，配置即用 |
+| 目的地 | 任意（自己实现） | 固定：**S3 / Redshift / OpenSearch / Splunk** |
+| 延迟 | **实时** ~200ms | **近实时**，最低 60 秒缓冲 |
+| 数据保留 | 1–365 天，**可重放** | ❌ 不存储，投递完即弃 |
+| 扩缩容 | 管 shard（或 On-Demand） | 全自动 |
+
+🔑 **判据**：`real-time` / `多个消费者` / `需要重放` → **KDS**
+　　　　`near real-time` / `load into S3/Redshift` / `no code` → **Firehose**
+
+---
+
+## 📌 分析服务最终结论（不再投入）
+
+关键词映射表（背死即满分，SAA 只占 1-3 题）：
+
+| 信号词 | 答案 |
+|---|---|
+| S3 + `偶尔`/`ad-hoc` + `最小运维` | **Athena** |
+| `data warehouse` / `复杂 join` / `PB 级` / `BI 报表` / `OLAP` | **Redshift** |
+| 已有 Redshift + `不加载`查 S3 | **Redshift Spectrum** |
+| `结构未知` / `自动发现 schema` | **Glue Crawler → Data Catalog** |
+| `清洗`/`转换格式` + 无服务器 + **定期调度** | **Glue ETL** |
+| `看板` / `可视化` / `BI` | **QuickSight** |
+| `Hadoop` / `Spark` / 自定义框架调优 | **EMR** |
+| 流数据 `近实时` 进 S3/Redshift + 无代码 | **Kinesis Firehose** |
+| 流数据 `实时` / 多消费者 / 可重放 | **Kinesis Data Streams** |
+| `全文搜索` / 日志分析看板 | **OpenSearch** |
+| Athena 降本 | **Parquet/ORC + 压缩 + 分区** |
+
+> 💡 通用解题技巧（这两轮反复验证）：先圈出题干的**频率词**（偶尔/持续/实时/每天）和**约束词**（成本/运维/无代码），答案基本就锁定了。
+> 「两个选项技术上都能做」时，判据永远是**约束词**，不是技术可行性。
