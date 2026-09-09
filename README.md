@@ -64,7 +64,7 @@ SAA-C03 (约 8-12 周)  →  SAP-C02 (约 8-12 周)
 |------|------|------|-----------|
 | **P1 补完数据库** ✅ | 9/3(木) – 9/7(月) | ✅ DynamoDB（分区键/GSI/LSI/DAX/TTL/容量模式）测验 5/6<br>✅ ElastiCache Redis vs Memcached 测验 **5/5**<br>✅ Redshift/Athena/Glue 测验 0/5 🚨 → 错题精读 → **重测 4/5** | Week 5 剩余 |
 | **P2 网络（最高频）** ✅ | 9/7(月) – 9/8(火) | ✅ VPC 核心：CIDR/子网/路由表/IGW/NAT GW/SG vs NACL — 测验 **9/10**<br>✅ VPC 互联：Peering/TGW/VPN/DX/Endpoints/PrivateLink — 测验 **10/10**<br>**P2 合计 19/20（95%）**，比原计划**提前 3 天完成** | Week 6 |
-| **P3 无服务器 + 集成** | 9/9(水) – 9/14(月)<br>*提前 3 天启动* | 🔸 9/9 Lambda + API Gateway 内容已讲完（笔记 `10-lambda-apigateway.md`，**10 题测验待做**）<br>SQS 标准 vs FIFO + DLQ、SNS 扇出、EventBridge、Step Functions<br>Kinesis 三兄弟（KDS vs Firehose 已在错题 10 覆盖） | Week 7 |
+| **P3 无服务器 + 集成** | 9/9(水) – 9/14(月)<br>*提前 3 天启动* | ✅ Lambda + API Gateway — 测验 **10/10** 🎯<br>🔸 SQS 标准 vs FIFO + DLQ、SNS 扇出、EventBridge、Step Functions<br>Kinesis 三兄弟（KDS vs Firehose 已在错题 10 覆盖） | Week 7 |
 | **P4 安全 + 监控** | 9/15(火) – 9/17(木) | KMS/CMK/跨账户加密、Secrets Manager vs Parameter Store、CloudTrail、CloudWatch、Config、WAF/Shield/GuardDuty/Inspector/Macie | Week 8 |
 | **P5 容器 + IaC + 成本** | 9/18(金) | ECS vs EKS vs Fargate、ECR、CloudFormation、Beanstalk、Cost Explorer/Budgets/Savings Plans | Week 9 |
 | **P6 模拟题冲刺** ⭐ | 9/19(土) – 9/23(水) | 9/19 模拟卷① + 错题精读<br>9/20 错题知识点回炉 + 写 cheatsheets<br>9/21 模拟卷② + 复盘<br>9/22 薄弱域专项（按①②的域得分定）<br>9/23 模拟卷③ + 复盘 | Week 10 |
@@ -75,12 +75,12 @@ SAA-C03 (约 8-12 周)  →  SAP-C02 (约 8-12 周)
 
 ### 📍 下次从这里开始（更新于 2026-09-09）
 
-1. **做 `notes/saa/10-lambda-apigateway.md` 末尾的 10 题测验**
-2. 然后继续 P3：**SQS / SNS / EventBridge / Step Functions**，再 Kinesis 三兄弟
+1. 继续 P3：**SQS / SNS / EventBridge / Step Functions**
+2. 然后 Kinesis 三兄弟（KDS vs Firehose 已在错题 10 覆盖）→ P3 收工
 
 **9/7 完成**：ElastiCache 5/5 ✅ ｜ 分析服务 0/5 → 错题精读 → 重测 4/5 ✅ **P1 收工**
 **9/8 完成**：VPC 核心 **9/10** ✅ ｜ VPC 互联 **10/10** 🎯 **P2 收工（19/20 = 95%）**
-**9/9 完成**：Lambda + API Gateway 内容已讲完（测验待做）
+**9/9 完成**：Lambda + API Gateway — 测验 **10/10** 🎯（连续两轮满分）
 
 > ➡️ **进度超前原计划约 3 天**，多出的时间全部并入 P6 模拟题冲刺（9/19-9/23 五连休）。
 
@@ -127,8 +127,8 @@ SAA-C03 (约 8-12 周)  →  SAP-C02 (约 8-12 周)
 - [x] VPC Endpoints（Gateway/Interface）+ PrivateLink（测验 10/10）
 
 #### Week 7：应用集成 + 无服务器（进行中）
-- [~] Lambda：触发器、并发、层（Layers）、边缘函数（笔记已写，测验待做）
-- [~] API Gateway：三种类型、端点类型、授权方式、29 秒超时（笔记已写，测验待做）
+- [x] Lambda：触发器、并发、层（Layers）、边缘函数（测验 10/10）
+- [x] API Gateway：三种类型、端点类型、授权方式、29 秒超时（测验 10/10）
 - [ ] SQS：标准 vs FIFO、延迟队列、死信队列（DLQ）
 - [ ] SNS：扇出模式（Fan-out）
 - [ ] EventBridge、Step Functions
@@ -239,7 +239,8 @@ okj-aws-saa/
 │   ├── saa/               # SAA 错题本 + 模拟记录
 │   │   ├── 01-week1-2-errors.md
 │   │   ├── 02-week5-errors.md
-│   │   └── 03-vpc-errors.md
+│   │   ├── 03-vpc-errors.md
+│   │   └── 04-serverless-errors.md
 │   └── sap/               # SAP 错题本 + 模拟记录
 └── cheatsheets/           # 考前速查表
     ├── saa-services.md    # 常见服务对比速查
