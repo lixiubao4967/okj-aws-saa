@@ -64,7 +64,7 @@ SAA-C03 (约 8-12 周)  →  SAP-C02 (约 8-12 周)
 |------|------|------|-----------|
 | **P1 补完数据库** ✅ | 9/3(木) – 9/7(月) | ✅ DynamoDB（分区键/GSI/LSI/DAX/TTL/容量模式）测验 5/6<br>✅ ElastiCache Redis vs Memcached 测验 **5/5**<br>✅ Redshift/Athena/Glue 测验 0/5 🚨 → 错题精读 → **重测 4/5** | Week 5 剩余 |
 | **P2 网络（最高频）** ✅ | 9/7(月) – 9/8(火) | ✅ VPC 核心：CIDR/子网/路由表/IGW/NAT GW/SG vs NACL — 测验 **9/10**<br>✅ VPC 互联：Peering/TGW/VPN/DX/Endpoints/PrivateLink — 测验 **10/10**<br>**P2 合计 19/20（95%）**，比原计划**提前 3 天完成** | Week 6 |
-| **P3 无服务器 + 集成** | 9/9(水) – 9/12(土) | ✅ Lambda + API Gateway — 测验 **10/10** 🎯<br>✅ SQS/SNS/EventBridge/Step Functions — 测验 **12/12** 🎯<br>🔸 Kinesis 三兄弟 + SQS/SNS/Kinesis 终极区分（笔记 `12-kinesis.md`，**8 题测验待做**） | Week 7 |
+| **P3 无服务器 + 集成** ✅ | 9/9(水) – 9/12(土) | ✅ Lambda + API Gateway — **10/10** 🎯<br>✅ SQS/SNS/EventBridge/Step Functions — **12/12** 🎯<br>✅ Kinesis 三兄弟 — **6/8**（错题 12-13）<br>**P3 合计 28/30（93%）**，比原计划**提前 2 天完成** | Week 7 |
 | **P4 安全 + 监控** | 9/15(火) – 9/17(木) | KMS/CMK/跨账户加密、Secrets Manager vs Parameter Store、CloudTrail、CloudWatch、Config、WAF/Shield/GuardDuty/Inspector/Macie | Week 8 |
 | **P5 容器 + IaC + 成本** | 9/18(金) | ECS vs EKS vs Fargate、ECR、CloudFormation、Beanstalk、Cost Explorer/Budgets/Savings Plans | Week 9 |
 | **P6 模拟题冲刺** ⭐ | 9/19(土) – 9/23(水) | 9/19 模拟卷① + 错题精读<br>9/20 错题知识点回炉 + 写 cheatsheets<br>9/21 模拟卷② + 复盘<br>9/22 薄弱域专项（按①②的域得分定）<br>9/23 模拟卷③ + 复盘 | Week 10 |
@@ -75,27 +75,33 @@ SAA-C03 (约 8-12 周)  →  SAP-C02 (约 8-12 周)
 
 ### 📍 下次从这里开始（更新于 2026-09-09）
 
-1. **做 `notes/saa/12-kinesis.md` 末尾的 8 题测验** → P3 收工
-2. 进入 **P4 安全 + 监控**（原定 9/15）：KMS、Secrets Manager vs Parameter Store、
-   CloudTrail、CloudWatch、Config、WAF/Shield/GuardDuty/Inspector/Macie
+**进入 P4 安全 + 监控**（原定 9/15，提前 3 天）—— Domain 1 占 **30%**，全考试权重最大：
+1. KMS/CMK/信封加密/跨账户加密、Secrets Manager vs SSM Parameter Store
+2. CloudTrail、CloudWatch（Metrics/Logs/Alarms）、AWS Config、Trusted Advisor
+3. WAF / Shield / GuardDuty / Inspector / Macie 五件套区分
 
 **9/7 完成**：ElastiCache 5/5 ✅ ｜ 分析服务 0/5 → 错题精读 → 重测 4/5 ✅ **P1 收工**
 **9/8 完成**：VPC 核心 **9/10** ✅ ｜ VPC 互联 **10/10** 🎯 **P2 收工（19/20 = 95%）**
 **9/9 完成**：Lambda + API Gateway — 测验 **10/10** 🎯（连续两轮满分）
 **9/10-9/11 完成**：SQS / SNS / EventBridge / Step Functions — 测验 **12/12** 🎯
-**9/12 完成**：Kinesis 三兄弟内容已讲完 + P3 全部时长数字汇总表（8 题测验待做）
+**9/12 完成**：Kinesis **6/8**（错题 12 partition key 顺序优先；错题 13 Firehose 不存储≠数据丢）→ **P3 收工 28/30（93%）**
 
-> 🔥 **连续三轮满分**（VPC 互联 10/10、Lambda+APIGW 10/10、应用集成 12/12）
+> 🔥 连续三轮满分后在 Kinesis 轮回落 —— 暴露两个新毛病，见下方提醒
 
 > ➡️ **进度超前原计划约 3 天**，多出的时间全部并入 P6 模拟题冲刺（9/19-9/23 五连休）。
 
 > 📌 **出题纪律（两次踩坑后的规则）**：给答题格式示例时必须用不可能是答案的串（如 `1A 2B 3C`），
 > 且**选项里的加粗只能强调题干关键词，绝不标记正确答案**。笔记里的测验一律不写答案。
 
-> ⚠️ 个人薄弱点提醒
-> 1. **计算题必须写出三步，不要心算**（错题 4）
-> 2. **服务能力边界要记准** —— 已暴露：Athena 联邦查询的用途、Glue Catalog 归谁用、DynamoDB 不能 join、KDS vs Firehose（错题 7-10）
-> 3. 解题通法：先圈**频率词**（偶尔/持续/实时/每天）+ **约束词**（成本/运维/无代码）。两选项都「技术可行」时，判据是约束词
+> ⚠️ 个人薄弱点提醒（累计 5 条，详见 `practice/saa/04-serverless-errors.md` 末尾）
+> 1. ✅ 过度设计 —— 已改正
+> 2. ✅ 计算题跳步 —— 已改正（写三步不心算）
+> 3. ✅ 服务能力边界记错 —— 已改正
+> 4. ⚠️ **漏读约束关键词（以「过度修正」形式复发）** —— 读完题干先列出**所有**约束词，逐条核对，别抓住一个就选
+> 5. ⚠️ **把服务属性套到整个架构** —— 架构题先画数据路径，再问「数据/状态现在在哪」
+>
+> 解题通法：先圈**频率词**（偶尔/持续/实时/每天）+ **约束词**（成本/运维/无代码/顺序）。
+> 两选项都「技术可行」时，判据是约束词。
 
 ### 10 周学习计划（原始版本，供对照）
 
@@ -131,13 +137,13 @@ SAA-C03 (约 8-12 周)  →  SAP-C02 (约 8-12 周)
 - [x] VPC Peering、Transit Gateway、VPN、Direct Connect（测验 10/10）
 - [x] VPC Endpoints（Gateway/Interface）+ PrivateLink（测验 10/10）
 
-#### Week 7：应用集成 + 无服务器（进行中）
+#### Week 7：应用集成 + 无服务器 ✅
 - [x] Lambda：触发器、并发、层（Layers）、边缘函数（测验 10/10）
 - [x] API Gateway：三种类型、端点类型、授权方式、29 秒超时（测验 10/10）
 - [x] SQS：标准 vs FIFO、可见性超时、长轮询、死信队列（DLQ）（测验 12/12）
 - [x] SNS：扇出模式（Fan-out）+ 消息过滤（测验 12/12）
 - [x] EventBridge（SaaS/cron/Replay）、Step Functions（Standard vs Express）（测验 12/12）
-- [~] Kinesis：Data Streams / Firehose / Managed Flink（笔记已写，测验待做）
+- [x] Kinesis：Data Streams / Firehose / Managed Flink（测验 6/8）
 
 #### Week 8：安全 + 监控
 - [ ] KMS：CMK、密钥轮换、跨账户加密
@@ -258,7 +264,7 @@ okj-aws-saa/
 
 ## 进度追踪
 
-- [x] SAA-C03 学习中（Week 1-6 完成 = **P1 + P2 收工**；P3 无服务器进行中，超前 3 天）
+- [x] SAA-C03 学习中（Week 1-7 完成 = **P1+P2+P3 收工**；P4 安全监控进行中，超前 3 天）
 - [x] SAA-C03 报名 ✅ 已预约 **2026-09-26（土）11:30 JST**，新桥国际会馆考场
 - [ ] SAA-C03 模拟题通过率 > 80%
 - [ ] SAA-C03 通过
