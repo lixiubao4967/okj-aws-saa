@@ -66,7 +66,7 @@ SAA-C03 (约 8-12 周)  →  SAP-C02 (约 8-12 周)
 | **P2 网络（最高频）** ✅ | 9/7(月) – 9/8(火) | ✅ VPC 核心：CIDR/子网/路由表/IGW/NAT GW/SG vs NACL — 测验 **9/10**<br>✅ VPC 互联：Peering/TGW/VPN/DX/Endpoints/PrivateLink — 测验 **10/10**<br>**P2 合计 19/20（95%）**，比原计划**提前 3 天完成** | Week 6 |
 | **P3 无服务器 + 集成** ✅ | 9/9(水) – 9/12(土) | ✅ Lambda + API Gateway — **10/10** 🎯<br>✅ SQS/SNS/EventBridge/Step Functions — **12/12** 🎯<br>✅ Kinesis 三兄弟 — **6/8**（错题 12-13）<br>**P3 合计 28/30（93%）**，比原计划**提前 2 天完成** | Week 7 |
 | **P4 安全 + 监控** ✅ | 9/13(日) 单日完成 | ✅ KMS + 密钥凭据管理 — **9/10**（错题 14）<br>✅ 监控审计四件套 — **9/10**（错题 15）<br>✅ 防护五件套 + Security Hub — **10/10** 🎯<br>**P4 合计 28/30（93%）**，比原计划**提前 4 天完成** | Week 8 |
-| **P5 容器 + IaC + 成本** | 9/13(日) – 9/18(金)<br>*提前 5 天启动* | 🔸 9/13 容器三兄弟 + ECR + App Runner 内容已讲完（笔记 `16-containers.md`，**10 题测验待做**）<br>CloudFormation（模板/StackSets/Change Sets）、Elastic Beanstalk<br>Cost Explorer / Budgets / Savings Plans / RI | Week 9 |
+| **P5 容器 + IaC + 成本** | 9/13(日) – 9/18(金)<br>*提前 5 天启动* | ✅ 容器三兄弟 + ECR + App Runner — 测验 **10/10** 🎯<br>🔸 CloudFormation（模板/StackSets/Change Sets）、Elastic Beanstalk<br>Cost Explorer / Budgets / Savings Plans / RI | Week 9 |
 | **P6 模拟题冲刺** ⭐ | 9/19(土) – 9/23(水) | 9/19 模拟卷① + 错题精读<br>9/20 错题知识点回炉 + 写 cheatsheets<br>9/21 模拟卷② + 复盘<br>9/22 薄弱域专项（按①②的域得分定）<br>9/23 模拟卷③ + 复盘 | Week 10 |
 | **P7 收尾** | 9/24(木) – 9/25(金) | 9/24 通读 cheatsheets + 官方样题<br>9/25 只看错题本和速查表，早睡 | — |
 | **考试** | **9/26(土)** | SAA-C03 | — |
@@ -75,9 +75,9 @@ SAA-C03 (约 8-12 周)  →  SAP-C02 (约 8-12 周)
 
 ### 📍 下次从这里开始（更新于 2026-09-09）
 
-1. **做 `notes/saa/16-containers.md` 末尾的 10 题测验**
-2. 继续 P5：**CloudFormation**（模板/StackSets/Change Sets）、**Elastic Beanstalk**
-3. 然后**成本优化**：Cost Explorer / Budgets / Savings Plans / RI → P5 收工
+1. 继续 P5：**CloudFormation**（模板/StackSets/Change Sets）、**Elastic Beanstalk**
+2. 然后**成本优化**：Cost Explorer / Budgets / Savings Plans / RI → P5 收工
+3. P5 完成后 = **全部知识模块结束**，进入模拟题冲刺
 
 > 💡 **富余时间用法**：P5 完成后距 9/19 还有约 5 天，可把模拟卷从 3 套加到 **4-5 套**，
 > 或提前开始写 cheatsheets。决策关卡 9/20 不变。
@@ -91,7 +91,7 @@ SAA-C03 (约 8-12 周)  →  SAP-C02 (约 8-12 周)
 **9/13 完成**：KMS + 密钥凭据管理 — 测验 **9/10**（错题 14：加密 EBS 快照跨 Region 复制）
 　　　　　　　监控审计四件套 — 测验 **9/10**（错题 15：EC2 Recover vs ASG 替换）
 　　　　　　　防护五件套 + Security Hub — **10/10** 🎯 → **P4 收工 28/30（93%）**
-　　　　　　　容器三兄弟 + ECR + App Runner 内容已讲完（10 题测验待做）
+　　　　　　　容器三兄弟 + ECR + App Runner — 测验 **10/10** 🎯
 
 > 🔥 连续三轮满分后在 Kinesis 轮回落 —— 暴露两个新毛病，见下方提醒
 
@@ -164,8 +164,8 @@ SAA-C03 (约 8-12 周)  →  SAP-C02 (约 8-12 周)
 - [x] WAF、Shield、GuardDuty、Inspector、Macie + Security Hub（测验 10/10）
 
 #### Week 9：容器 + 其他服务（进行中）
-- [~] ECS vs EKS vs Fargate 选择场景（笔记已写，测验待做）
-- [~] ECR、App Runner（笔记已写，测验待做）
+- [x] ECS vs EKS vs Fargate 选择场景（测验 10/10）
+- [x] ECR、App Runner（测验 10/10）
 - [ ] CloudFormation：模板结构、StackSets、Change Sets
 - [ ] Elastic Beanstalk、OpsWorks
 - [ ] 成本优化：Cost Explorer、Budgets、Savings Plans
@@ -269,7 +269,8 @@ okj-aws-saa/
 │   │   ├── 02-week5-errors.md
 │   │   ├── 03-vpc-errors.md
 │   │   ├── 04-serverless-errors.md
-│   │   └── 05-security-errors.md
+│   │   ├── 05-security-errors.md
+│   │   └── 06-containers-iac-cost-errors.md
 │   └── sap/               # SAP 错题本 + 模拟记录
 └── cheatsheets/           # 考前速查表
     ├── saa-services.md    # 常见服务对比速查
