@@ -65,7 +65,7 @@ SAA-C03 (约 8-12 周)  →  SAP-C02 (约 8-12 周)
 | **P1 补完数据库** ✅ | 9/3(木) – 9/7(月) | ✅ DynamoDB（分区键/GSI/LSI/DAX/TTL/容量模式）测验 5/6<br>✅ ElastiCache Redis vs Memcached 测验 **5/5**<br>✅ Redshift/Athena/Glue 测验 0/5 🚨 → 错题精读 → **重测 4/5** | Week 5 剩余 |
 | **P2 网络（最高频）** ✅ | 9/7(月) – 9/8(火) | ✅ VPC 核心：CIDR/子网/路由表/IGW/NAT GW/SG vs NACL — 测验 **9/10**<br>✅ VPC 互联：Peering/TGW/VPN/DX/Endpoints/PrivateLink — 测验 **10/10**<br>**P2 合计 19/20（95%）**，比原计划**提前 3 天完成** | Week 6 |
 | **P3 无服务器 + 集成** ✅ | 9/9(水) – 9/12(土) | ✅ Lambda + API Gateway — **10/10** 🎯<br>✅ SQS/SNS/EventBridge/Step Functions — **12/12** 🎯<br>✅ Kinesis 三兄弟 — **6/8**（错题 12-13）<br>**P3 合计 28/30（93%）**，比原计划**提前 2 天完成** | Week 7 |
-| **P4 安全 + 监控** | 9/15(火) – 9/17(木) | KMS/CMK/跨账户加密、Secrets Manager vs Parameter Store、CloudTrail、CloudWatch、Config、WAF/Shield/GuardDuty/Inspector/Macie | Week 8 |
+| **P4 安全 + 监控** | 9/13(日) – 9/17(木)<br>*提前 2 天启动* | 🔸 9/13 KMS + 密钥凭据管理内容已讲完（笔记 `13-kms-secrets.md`，**10 题测验待做**）<br>CloudTrail、CloudWatch、Config、Trusted Advisor<br>WAF / Shield / GuardDuty / Inspector / Macie 五件套 | Week 8 |
 | **P5 容器 + IaC + 成本** | 9/18(金) | ECS vs EKS vs Fargate、ECR、CloudFormation、Beanstalk、Cost Explorer/Budgets/Savings Plans | Week 9 |
 | **P6 模拟题冲刺** ⭐ | 9/19(土) – 9/23(水) | 9/19 模拟卷① + 错题精读<br>9/20 错题知识点回炉 + 写 cheatsheets<br>9/21 模拟卷② + 复盘<br>9/22 薄弱域专项（按①②的域得分定）<br>9/23 模拟卷③ + 复盘 | Week 10 |
 | **P7 收尾** | 9/24(木) – 9/25(金) | 9/24 通读 cheatsheets + 官方样题<br>9/25 只看错题本和速查表，早睡 | — |
@@ -75,16 +75,17 @@ SAA-C03 (约 8-12 周)  →  SAP-C02 (约 8-12 周)
 
 ### 📍 下次从这里开始（更新于 2026-09-09）
 
-**进入 P4 安全 + 监控**（原定 9/15，提前 3 天）—— Domain 1 占 **30%**，全考试权重最大：
-1. KMS/CMK/信封加密/跨账户加密、Secrets Manager vs SSM Parameter Store
-2. CloudTrail、CloudWatch（Metrics/Logs/Alarms）、AWS Config、Trusted Advisor
-3. WAF / Shield / GuardDuty / Inspector / Macie 五件套区分
+1. **做 `notes/saa/13-kms-secrets.md` 末尾的 10 题测验**
+2. 继续 P4：CloudTrail、CloudWatch（Metrics/Logs/Alarms）、AWS Config、Trusted Advisor
+3. 然后 WAF / Shield / GuardDuty / Inspector / Macie 五件套区分 → P4 收工
 
 **9/7 完成**：ElastiCache 5/5 ✅ ｜ 分析服务 0/5 → 错题精读 → 重测 4/5 ✅ **P1 收工**
 **9/8 完成**：VPC 核心 **9/10** ✅ ｜ VPC 互联 **10/10** 🎯 **P2 收工（19/20 = 95%）**
 **9/9 完成**：Lambda + API Gateway — 测验 **10/10** 🎯（连续两轮满分）
 **9/10-9/11 完成**：SQS / SNS / EventBridge / Step Functions — 测验 **12/12** 🎯
 **9/12 完成**：Kinesis **6/8**（错题 12 partition key 顺序优先；错题 13 Firehose 不存储≠数据丢）→ **P3 收工 28/30（93%）**
+
+**9/13 完成**：KMS + 密钥凭据管理内容已讲完（笔记 `13-kms-secrets.md`，10 题测验待做）
 
 > 🔥 连续三轮满分后在 Kinesis 轮回落 —— 暴露两个新毛病，见下方提醒
 
@@ -145,9 +146,9 @@ SAA-C03 (约 8-12 周)  →  SAP-C02 (约 8-12 周)
 - [x] EventBridge（SaaS/cron/Replay）、Step Functions（Standard vs Express）（测验 12/12）
 - [x] Kinesis：Data Streams / Firehose / Managed Flink（测验 6/8）
 
-#### Week 8：安全 + 监控
-- [ ] KMS：CMK、密钥轮换、跨账户加密
-- [ ] Secrets Manager vs SSM Parameter Store
+#### Week 8：安全 + 监控（进行中）
+- [~] KMS：三种密钥、信封加密、CMK、密钥轮换、跨账户双重授权（笔记已写，测验待做）
+- [~] Secrets Manager vs SSM Parameter Store（笔记已写，测验待做）
 - [ ] CloudTrail、CloudWatch（Metrics/Logs/Alarms/Events）
 - [ ] AWS Config、Trusted Advisor
 - [ ] WAF、Shield、GuardDuty、Inspector、Macie
@@ -243,7 +244,8 @@ okj-aws-saa/
 │   │   ├── 09-vpc-connectivity.md  # Peering/TGW/VPN/DX/Endpoints
 │   │   ├── 10-lambda-apigateway.md # Lambda 并发/VPC/Edge + API Gateway
 │   │   ├── 11-sqs-sns-eventbridge-stepfunctions.md  # 应用集成
-│   │   └── 12-kinesis.md      # Kinesis 三兄弟 + SQS/SNS/Kinesis 区分
+│   │   ├── 12-kinesis.md      # Kinesis 三兄弟 + SQS/SNS/Kinesis 区分
+│   │   └── 13-kms-secrets.md  # KMS/信封加密 + Secrets Manager vs Parameter Store
 │   └── sap/               # SAP-C02 进阶笔记
 │       ├── 01-organizations.md
 │       ├── 02-hybrid-network.md
