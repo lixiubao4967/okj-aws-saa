@@ -65,7 +65,7 @@ SAA-C03 (约 8-12 周)  →  SAP-C02 (约 8-12 周)
 | **P1 补完数据库** ✅ | 9/3(木) – 9/7(月) | ✅ DynamoDB（分区键/GSI/LSI/DAX/TTL/容量模式）测验 5/6<br>✅ ElastiCache Redis vs Memcached 测验 **5/5**<br>✅ Redshift/Athena/Glue 测验 0/5 🚨 → 错题精读 → **重测 4/5** | Week 5 剩余 |
 | **P2 网络（最高频）** ✅ | 9/7(月) – 9/8(火) | ✅ VPC 核心：CIDR/子网/路由表/IGW/NAT GW/SG vs NACL — 测验 **9/10**<br>✅ VPC 互联：Peering/TGW/VPN/DX/Endpoints/PrivateLink — 测验 **10/10**<br>**P2 合计 19/20（95%）**，比原计划**提前 3 天完成** | Week 6 |
 | **P3 无服务器 + 集成** ✅ | 9/9(水) – 9/12(土) | ✅ Lambda + API Gateway — **10/10** 🎯<br>✅ SQS/SNS/EventBridge/Step Functions — **12/12** 🎯<br>✅ Kinesis 三兄弟 — **6/8**（错题 12-13）<br>**P3 合计 28/30（93%）**，比原计划**提前 2 天完成** | Week 7 |
-| **P4 安全 + 监控** | 9/13(日) – 9/17(木)<br>*提前 2 天启动* | ✅ KMS + 密钥凭据管理 — 测验 **9/10**（错题 14）<br>✅ 监控审计四件套 — 测验 **9/10**（错题 15）<br>🔸 防护五件套 WAF/Shield/GuardDuty/Inspector/Macie + Security Hub 内容已讲完（笔记 `15-security-services.md`，**10 题测验待做**） | Week 8 |
+| **P4 安全 + 监控** ✅ | 9/13(日) 单日完成 | ✅ KMS + 密钥凭据管理 — **9/10**（错题 14）<br>✅ 监控审计四件套 — **9/10**（错题 15）<br>✅ 防护五件套 + Security Hub — **10/10** 🎯<br>**P4 合计 28/30（93%）**，比原计划**提前 4 天完成** | Week 8 |
 | **P5 容器 + IaC + 成本** | 9/18(金) | ECS vs EKS vs Fargate、ECR、CloudFormation、Beanstalk、Cost Explorer/Budgets/Savings Plans | Week 9 |
 | **P6 模拟题冲刺** ⭐ | 9/19(土) – 9/23(水) | 9/19 模拟卷① + 错题精读<br>9/20 错题知识点回炉 + 写 cheatsheets<br>9/21 模拟卷② + 复盘<br>9/22 薄弱域专项（按①②的域得分定）<br>9/23 模拟卷③ + 复盘 | Week 10 |
 | **P7 收尾** | 9/24(木) – 9/25(金) | 9/24 通读 cheatsheets + 官方样题<br>9/25 只看错题本和速查表，早睡 | — |
@@ -75,9 +75,13 @@ SAA-C03 (约 8-12 周)  →  SAP-C02 (约 8-12 周)
 
 ### 📍 下次从这里开始（更新于 2026-09-09）
 
-1. **做 `notes/saa/15-security-services.md` 末尾的 10 题测验** → P4 收工
-2. 然后 **P5 容器 + IaC + 成本**（原定 9/18）：ECS vs EKS vs Fargate、ECR、
-   CloudFormation、Beanstalk、Cost Explorer/Budgets/Savings Plans
+**进入 P5 容器 + IaC + 成本**（原定 9/18，提前 5 天）—— 最后一个知识模块：
+1. ECS vs EKS vs Fargate、ECR、App Runner
+2. CloudFormation（模板/StackSets/Change Sets）、Elastic Beanstalk
+3. 成本优化：Cost Explorer / Budgets / Savings Plans / RI
+
+> 💡 **富余时间用法**：P5 完成后距 9/19 还有约 5 天，可把模拟卷从 3 套加到 **4-5 套**，
+> 或提前开始写 cheatsheets。决策关卡 9/20 不变。
 
 **9/7 完成**：ElastiCache 5/5 ✅ ｜ 分析服务 0/5 → 错题精读 → 重测 4/5 ✅ **P1 收工**
 **9/8 完成**：VPC 核心 **9/10** ✅ ｜ VPC 互联 **10/10** 🎯 **P2 收工（19/20 = 95%）**
@@ -87,7 +91,7 @@ SAA-C03 (约 8-12 周)  →  SAP-C02 (约 8-12 周)
 
 **9/13 完成**：KMS + 密钥凭据管理 — 测验 **9/10**（错题 14：加密 EBS 快照跨 Region 复制）
 　　　　　　　监控审计四件套 — 测验 **9/10**（错题 15：EC2 Recover vs ASG 替换）
-　　　　　　　防护五件套内容已讲完（10 题测验待做）
+　　　　　　　防护五件套 + Security Hub — **10/10** 🎯 → **P4 收工 28/30（93%）**
 
 > 🔥 连续三轮满分后在 Kinesis 轮回落 —— 暴露两个新毛病，见下方提醒
 
@@ -152,12 +156,12 @@ SAA-C03 (约 8-12 周)  →  SAP-C02 (约 8-12 周)
 - [x] EventBridge（SaaS/cron/Replay）、Step Functions（Standard vs Express）（测验 12/12）
 - [x] Kinesis：Data Streams / Firehose / Managed Flink（测验 6/8）
 
-#### Week 8：安全 + 监控（进行中）
+#### Week 8：安全 + 监控 ✅
 - [x] KMS：三种密钥、信封加密、CMK、密钥轮换、跨账户双重授权（测验 9/10）
 - [x] Secrets Manager vs SSM Parameter Store（测验 9/10）
 - [x] CloudTrail（90天/Data Events/Organization Trail）、CloudWatch（Metrics/Logs/Alarms）（测验 9/10）
 - [x] AWS Config、Trusted Advisor、VPC Flow Logs（测验 9/10）
-- [~] WAF、Shield、GuardDuty、Inspector、Macie + Security Hub（笔记已写，测验待做）
+- [x] WAF、Shield、GuardDuty、Inspector、Macie + Security Hub（测验 10/10）
 
 #### Week 9：容器 + 其他服务
 - [ ] ECS vs EKS vs Fargate 选择场景
@@ -275,7 +279,7 @@ okj-aws-saa/
 
 ## 进度追踪
 
-- [x] SAA-C03 学习中（Week 1-7 完成 = **P1+P2+P3 收工**；P4 安全监控进行中，超前 3 天）
+- [x] SAA-C03 学习中（Week 1-8 完成 = **P1~P4 全收工**；P5 容器/IaC/成本进行中，超前 5 天）
 - [x] SAA-C03 报名 ✅ 已预约 **2026-09-26（土）11:30 JST**，新桥国际会馆考场
 - [ ] SAA-C03 模拟题通过率 > 80%
 - [ ] SAA-C03 通过
