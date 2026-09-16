@@ -408,3 +408,198 @@ A) S3 Standard-IA 存在最低 30 天的存储时长计费要求
 B) S3 Glacier Deep Archive 的标准取回时间约为 12 小时
 C) S3 Intelligent-Tiering 在各层之间自动转换时不收取检索费用
 D) S3 One Zone-IA 的可用性和持久性与 S3 Standard-IA 完全相同
+
+---
+
+## 第 3 批（Q45–Q65）
+
+> ⏱️ 建议限时 **50 分钟**
+> 🚨 **强制执行「回读验证」**：选出答案后，回到题干，找出每一句带要求的话，
+> 　 逐句问「我选的这个，满足这句吗？」——任何一句不满足就换选项。
+
+**Q45.** 某支付清算平台要求跨区域灾备达到：**RTO 数分钟、RPO 接近零**，并且明确规定**在灾难发生时备用区域必须能立即承接 100% 的生产流量，不接受任何扩容等待时间**。预算不是主要限制。
+
+A) Backup & Restore，灾难时用跨区快照重建
+B) Pilot Light，常驻数据库副本，其余资源关机待命
+C) Warm Standby，第二区域常驻缩小规模环境，灾难时再扩容到全量
+D) Multi-Site Active/Active，两区域同时以全量规模承载生产流量
+
+---
+
+**Q46.** 一批 EC2 实例位于**没有任何互联网出口**的私有子网中（既无 NAT Gateway 也无 IGW 路由）。运维团队需要通过 **AWS Systems Manager Session Manager 登录这些实例并下发补丁**。出于成本考虑，公司**不希望为此新增 NAT Gateway**。
+
+A) 部署 NAT Gateway，让实例可以访问 SSM 的公网端点
+B) 为这些实例分配弹性 IP 并添加 IGW 路由
+C) 在该 VPC 中为 `ssm`、`ssmmessages`、`ec2messages` 创建 Interface Endpoint
+D) 创建 Gateway Endpoint 指向 Systems Manager
+
+---
+
+**Q47.** 某 Web 应用运行在 ALB 后的 Auto Scaling 组中，用户登录会话保存在**各实例的本地内存**里。每次扩缩容或实例替换，落到新实例上的用户都会被强制登出。架构师希望做到**实例可以随时被替换而完全不影响用户会话**。
+
+A) 在 ALB 上启用会话粘性（Sticky Sessions）
+B) 提高实例内存规格以容纳更多会话
+C) 关闭 Auto Scaling 的缩容策略
+D) 将会话状态外置到 ElastiCache for Redis，实例本身保持无状态
+
+---
+
+**Q48.** 某公司 S3 中有 PB 级数据，存储成本持续上涨。团队想**先弄清楚哪些对象在写入后长期未被访问**，据此制定生命周期策略，但不希望自行开发访问日志分析系统。
+
+A) 启用 S3 Storage Class Analysis，由其分析访问模式并给出转换建议
+B) 使用 Amazon Macie 扫描对象
+C) 开启 CloudTrail Data Events，将日志投递到 S3 后用 Athena 自行分析
+D) 生成 S3 Inventory 报表并人工比对
+
+---
+
+**Q49.** 一款移动 App 的用户已通过 **Cognito User Pool 完成登录**。产品需要让用户**直接从手机上传照片到 S3**，要求：**App 安装包中不得包含任何 AWS 凭证**；且**每个用户只能写入属于自己的对象前缀**。
+
+A) 在 App 中嵌入一个只有 S3 写权限的 IAM 用户 access key
+B) 将 S3 桶设为公开可写，靠应用层校验
+C) 所有上传都经由 Lambda 代理转发到 S3
+D) 使用 Cognito Identity Pool 换取临时凭证，并在 IAM 策略中用 `${cognito-identity.amazonaws.com:sub}` 限制可写前缀
+
+---
+
+**Q50.** 某 SQS 队列由 Lambda 消费。近期下游一个第三方依赖不稳定，导致部分消息**反复处理失败**。这些消息不断被重新投递并重试，**占满了 Lambda 的并发配额**，进而拖累了其他正常消息的处理。
+
+A) 申请提高账户的 Lambda 并发上限
+B) 为该队列配置死信队列（DLQ）并设置合理的 maxReceiveCount
+C) 缩短队列的可见性超时，让消息更快重新可见
+D) 将队列替换为 SNS 主题
+
+---
+
+**Q51.** 一家跨国企业的员工分布在欧洲、南美和东南亚，他们需要**频繁向位于 us-east-1 的 S3 存储桶上传大型设计文件**。各地员工普遍反映**上传速度很慢**，而下载已有内容的速度可以接受。
+
+A) 在该 S3 桶前部署 CloudFront 分发
+B) 为该 S3 桶启用 Transfer Acceleration
+C) 将桶跨区复制到欧洲、南美和东南亚区域，让员工就近上传
+D) 为各办公室订购 Snowball 设备
+
+---
+
+**Q52.** 安全合规要求：**RDS 数据库的主密码必须每 30 天自动轮换一次**；轮换后**应用无需重启或重新部署**即可使用新密码；且团队**不希望自行编写和维护轮换逻辑**。
+
+A) 将密码存入 SSM Parameter Store SecureString，由运维每月手动更新
+B) 将密码写在应用的环境变量中，发版时更新
+C) 使用 AWS Secrets Manager 并启用托管的自动轮换，应用通过 SDK 在每次连接前获取当前密码
+D) 用 KMS 加密密码后存放在 S3，应用启动时解密读取
+
+---
+
+**Q53.** 某 Redshift 集群仅供 BI 团队使用，实际访问时间是**工作日 09:00–18:00**，夜间和周末完全没有查询。集群规模无法缩小（数据量决定），但财务要求削减这部分开支。
+
+A) 为该集群购买 Reserved Node
+B) 减少集群节点数量并接受查询变慢
+C) 改用 Athena 查询，下线 Redshift
+D) 使用 Redshift 的暂停/恢复（Pause/Resume）功能，配合调度在非工作时间暂停集群
+
+---
+
+**Q54.** 一个无状态的遗留应用运行在**单台 EC2 实例**上，所有数据都存放在 EFS 上。该应用无法横向扩展。业务要求：**当实例或其所在可用区发生故障时，能自动在另一个可用区重新拉起实例**恢复服务，可以接受几分钟的停机。
+
+A) 配置 CloudWatch Alarm 监控 StatusCheckFailed_System 并触发 EC2 Recover 动作
+B) 为该应用启用 RDS Multi-AZ
+C) 定期创建 AMI，故障时由运维手动在另一可用区恢复
+D) 将该实例放入 Auto Scaling 组，设置 min=max=desired=1 并跨多个可用区
+
+---
+
+**Q55.** 某公共 API 由 API Gateway + Lambda 构成。营销活动开始的瞬间会出现**每秒数万次请求的突发**，远超账户的 Lambda 并发配额，导致大量请求收到 429 错误。业务要求：**突发期间的请求一个都不能丢**，但**允许稍后再处理**（异步返回结果）。
+
+A) 提高 Lambda 函数的内存配置以加快单次执行
+B) 让 API Gateway 直接集成 SQS，请求先入队立即返回受理响应，再由 Lambda 按自身速率消费
+C) 为该 Lambda 配置 Provisioned Concurrency
+D) 将后端从 Lambda 改为 EC2 Auto Scaling 组
+
+---
+
+**Q56.** 某金融机构的合规制度规定：**用于加密跨区域传输数据的密钥材料必须由公司在自有 HSM 中生成**，再提供给云厂商使用；公司需要保留随时吊销该密钥材料的能力。
+
+A) 使用 AWS 托管密钥（AWS Managed Key）
+B) 创建客户托管密钥（CMK），由 AWS 生成密钥材料
+C) 创建客户托管密钥（CMK），并导入公司自行生成的密钥材料（BYOK）
+D) 使用 S3 的 SSE-S3 默认加密
+
+---
+
+**Q57.** 某团队的生产负载已经稳定运行 3 个月，预计还将持续一段时间，因此希望获得折扣。但技术路线图显示**半年后会把这批服务重构成 Fargate 容器**，届时 EC2 用量会大幅下降。团队不希望被长期锁定在特定实例族上。
+
+A) 购买 3 年期标准预留实例（Standard RI）
+B) 购买 1 年期 Compute Savings Plans
+C) 购买 3 年期 EC2 Instance Savings Plans
+D) 全部改用 Spot 实例
+
+---
+
+**Q58.** 某 DynamoDB 表承载核心业务数据。团队担心运维或应用 bug 导致误删、误改，要求具备**恢复到过去 35 天内任意一秒状态**的能力，且希望开启后无需再做任何日常维护。
+
+A) 为该表启用时间点恢复（Point-in-Time Recovery, PITR）
+B) 编写 Lambda 每天执行一次按需备份
+C) 启用 Global Tables 在另一区域保留副本
+D) 启用 DynamoDB Streams 并将变更记录写入 S3
+
+---
+
+**Q59.** 数据工程团队需要每天运行一批**自定义的 Spark 作业**，作业依赖特定版本的第三方库，并且工程师需要**调整集群参数（executor 内存、并行度等）来优化性能**。
+
+A) 使用 Amazon Athena 执行 SQL 查询
+B) 使用 AWS Glue ETL 的无服务器作业
+C) 使用 Amazon EMR 集群运行 Spark 作业
+D) 将数据加载进 Redshift 后用 SQL 处理
+
+---
+
+**Q60.** 某电商网站已部署 CloudFront + AWS WAF，仍在促销期间遭遇持续的**应用层 DDoS（HTTP flood）**。管理层要求：攻击期间能获得 **AWS 专家团队的实时协助**，并且**因抵御攻击而产生的资源扩容费用能够获得补偿**。
+
+A) 启用 AWS Shield Standard
+B) 在 WAF 中添加更多自定义规则和速率限制
+C) 订阅 AWS Shield Advanced
+D) 启用 Amazon GuardDuty 检测攻击来源
+
+---
+
+**Q61.** 某医疗机构需要保存 **10 年**的历史影像归档数据，仅为满足监管要求。这些数据**预计永远不会被访问**，万一需要调取，**48 小时内取回即可接受**。要求存储成本最低。
+
+A) S3 Standard-IA
+B) S3 Glacier Flexible Retrieval
+C) S3 Glacier Deep Archive
+D) S3 One Zone-IA
+
+---
+
+**Q62.** 某应用的 Auto Scaling 组配置在 3 个可用区，期望容量 12 台。架构评审提问：如果其中一个可用区完全不可用，系统会如何反应？团队希望确认容量能够**自动在剩余的健康可用区中补足**。
+
+A) 将 ASG 配置为跨 3 个可用区，ASG 会自动在健康的可用区中重新平衡并补足容量
+B) 需要运维人员手动修改 ASG 配置把容量迁移到其他可用区
+C) 将 ALB 替换为 NLB 以获得跨可用区容错
+D) 配置 Route 53 故障转移记录指向备用区域
+
+---
+
+**Q63.** 关于 AWS IAM 的策略评估逻辑，下列说法**错误**的是？
+
+A) IAM 角色提供的是临时凭证，会自动过期和轮换
+B) SCP 本身不授予任何权限，只用于设定权限上限
+C) 权限边界（Permissions Boundary）可用于限制某个 IAM 实体能获得的最大权限
+D) 当策略中同时存在显式 Allow 和显式 Deny 时，显式 Allow 优先生效
+
+---
+
+**Q64.** 一个高并发 Lambda 函数直接连接 Aurora MySQL。流量高峰时数据库报 **"Too many connections"**，监控显示数据库**连接数被耗尽**：每个 Lambda 执行环境都各自建立了新连接且未复用。Lambda 本身的执行时长和冷启动指标均正常。
+
+A) 提高 Aurora 实例规格以支持更多连接
+B) 为该 Lambda 配置 Provisioned Concurrency
+C) 将数据库改为 DynamoDB
+D) 在 Lambda 与 Aurora 之间引入 RDS Proxy 复用连接池
+
+---
+
+**Q65.** 某公司有 6 个业务部门共用一个 AWS 账户。财务要求：**能够按部门查看各自的资源花费**，并且**为每个部门单独设置预算阈值告警**。公司希望尽量不改动现有账户结构。
+
+A) 启用成本分配标签（Cost Allocation Tags），为资源打上部门标签，并在 AWS Budgets 中按标签为每个部门创建预算
+B) 为每个部门拆分出独立的 AWS 账户
+C) 在 Cost Explorer 中按资源类型手动分摊费用到各部门
+D) 导出 Cost and Usage Report 后由财务人工统计
