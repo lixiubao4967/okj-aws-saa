@@ -88,3 +88,43 @@
 | Region 级别灾难恢复 | Aurora Global Database |
 | 重复热点查询 + 读取瓶颈 | ElastiCache 缓存（不是加副本） |
 | Lambda 大量短连接 | RDS Proxy |
+| **MongoDB / 文档数据库 / JSON documents** | **DocumentDB** |
+
+---
+
+## 5. 数据库认证：控制平面 vs 数据平面 🆕
+
+> 补充于 2026-09-20（官方练习题 Q7 错题，原笔记未覆盖 DocumentDB）
+
+```
+控制平面 Control Plane —— 管「数据库这个资源」
+  创建集群 / 改规格 / 删除 / 备份 / 打标签      ✅ IAM 管得了
+
+数据平面 Data Plane —— 管「数据库里的数据」
+  连接 / 查询 / 插入 / 删除                    ❌ 未必归 IAM 管
+```
+
+| 数据库 | IAM 管控制平面 | **IAM 能直接认证数据库连接吗** |
+|---|---|---|
+| **DynamoDB** | ✅ | ✅ **纯 IAM**，没有"数据库用户"概念 |
+| **RDS MySQL / PostgreSQL** | ✅ | ✅ IAM database authentication |
+| **Aurora MySQL / PostgreSQL** | ✅ | ✅ |
+| RDS for Oracle / SQL Server | ✅ | ❌ |
+| **DocumentDB** | ✅ | ❌ **只能用户名 + 密码** |
+| Redshift | ✅ | ✅ 可用 IAM 换临时凭据 |
+
+> **记忆逻辑**：DynamoDB 是 AWS 原生 → 纯 IAM；
+> **兼容开源引擎的**（MongoDB / Oracle / SQL Server）受限于引擎自身认证机制，IAM 插不进去。
+
+### Amazon DocumentDB
+
+| 项目 | 内容 |
+|---|---|
+| 是什么 | 兼容 **MongoDB** 的托管文档数据库，存 JSON 文档 |
+| 架构 | 类 Aurora：存算分离，存储自动扩容，最多 15 只读副本 |
+| **题干关键词** | **MongoDB / document database / JSON documents / 从 MongoDB 迁移** |
+| 认证 | 用户名 + 密码（IAM 只管控制平面） |
+| 网络 | 必须在 VPC 内，不能公网直连 |
+
+⚠️ **IAM policy 只回答"允不允许"，不会主动执行任何动作**（不会去改密码）。
+想自动轮换数据库凭据 → **Secrets Manager**（支持 RDS / DocumentDB / Redshift 托管轮换）。

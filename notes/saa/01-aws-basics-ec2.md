@@ -95,8 +95,24 @@
 | sc1 | 最便宜 HDD | 归档（HDD 不能做启动盘） |
 
 ### Instance Store
-- 物理磁盘，极高 IOPS，但 **EC2 停止后数据丢失**
-- 适合缓存、临时文件
+
+| 属性 | 内容 |
+|------|------|
+| 是什么 | 物理直连宿主机的本地 NVMe SSD / HDD，**不走网络** |
+| 性能 | 🔥 最高档：数十万随机 IOPS、微秒级延迟（EBS 走网络，天然慢一截） |
+| **💰 费用** | **$0 额外费用**，已含在实例小时价里 ⭐ |
+| **⚠️ 持久性** | **临时**。**stop / terminate / 宿主机故障 → 数据全丢**（仅 reboot 不丢） |
+| 限制 | 不能做快照、不能分离后挂到别的实例、容量由实例类型固定 |
+| 适用 | 缓存、临时文件、scratch 空间、buffer、可重建的数据 |
+
+> **核心权衡：用持久性换性能和成本。**
+
+**🎯 考点信号**：`temporary data` + `discarded after use` + 高 IOPS + `MOST cost-effective`
+→ **storage optimized 实例（I 族）+ instance store**，不要选 io1/io2。
+
+> ⚠️ **`io1/io2` 按 GB + 按【预置 IOPS】双重计费**，40,000 IOPS 光 IOPS 费就 ≈ $2,400/月。
+> 题目说 cost-effective 又要很高 IOPS → **io1/io2 基本是陷阱**。
+> 参见错题：`practice/saa/09-official-practice-set-review.md` Q14
 
 ### EBS 快照
 - 增量备份，可跨 AZ / 跨 Region 复制
