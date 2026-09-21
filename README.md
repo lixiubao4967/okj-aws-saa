@@ -149,6 +149,8 @@ SAA-C03 (约 8-12 周)  →  SAP-C02 (约 8-12 周)
 > - `cheatsheets/saa-services.md` —— 数字速查、默认值陷阱、核心对比表、排错四步法
 > - `cheatsheets/saa-scenarios.md` —— **第零节是个人失分点对策，考前必读**；关键词映射总表、
 >   高频架构母题、考试当天操作清单
+> - `cheatsheets/saa-naming-traps.md` 🆕 —— **同名词辨析**：Gateway 全家族（网络/端点/LB/存储）、
+>   Endpoint 家族、Policy 家族。治"一看到 Gateway 就发懵"
 
 > ⚠️ **重要提醒**：此前所有测验都是 Claude 出的**单模块题**，与真考差异明显：
 > 真考是**跨域混合、题干更长、干扰项更精细**，且 65 题/130 分钟的**时间压力**无法用分模块练习模拟。
@@ -174,6 +176,11 @@ SAA-C03 (约 8-12 周)  →  SAP-C02 (约 8-12 周)
 **9/20 完成**：9 道错题逐题精读 + 知识巩固 → `practice/saa/09-official-practice-set-review.md`
 　　　　　　　📝 补齐笔记缺口：`01` Instance Store 完整属性（原缺「免费」这条决胜点）
 　　　　　　　📝 新增 `04` 第 5 节：控制平面 vs 数据平面 + DocumentDB（原完全未覆盖）
+　　　　　　　🚨 **TD Practice Test 1（Exam mode）：25/65 = 38%**，四个域 33-45% 全面偏低
+**9/21 进行中**：TD Test 1 错题逐题精读（Q1/Q3/Q5/Q8/Q9/Q10…）
+　　　　　　　📝 `01` 补 Instance Store「只能启动时指定」+ EBS 快照 ≠ S3 对象 对照表
+　　　　　　　📝 `03` 补「IA ≠ Archive」关键词判据 + 生命周期瀑布模型
+　　　　　　　✍️ **新增 `cheatsheets/saa-naming-traps.md`** —— Gateway/Endpoint/Policy 同名词辨析
 
 > 🔥 连续三轮满分后在 Kinesis 轮回落 —— 暴露两个新毛病，见下方提醒
 

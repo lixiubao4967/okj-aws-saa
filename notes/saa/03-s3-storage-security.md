@@ -16,6 +16,28 @@
 - 合规/审计场景不能用 One Zone-IA（单 AZ 有数据丢失风险），应选 Standard-IA
 - Intelligent-Tiering 有月度监控费用，但无取回费用
 
+> 🔑 **IA ≠ Archive —— 题干用词直接决定选哪个（高频陷阱）**
+>
+> | 题干英文 | 定位 | 选 |
+> |---|---|---|
+> | **`infrequent access`** 不常访问但**随时要秒读** | 少读，快取 | **Standard-IA / One Zone-IA** |
+> | **`archive` / `archival` / `long-term retention`** | 基本不读，**取回可以等** | **Glacier 系列** |
+>
+> 看到 **archive / archival / long-term retention** → **一律 Glacier**，IA 是干扰项。
+> 再细分：毫秒取回 → Glacier Instant；小时级可接受 → Glacier Flexible；
+> 最低成本/极少取 → Deep Archive。
+
+### 生命周期「瀑布模型」（转换只能往下走）
+
+```
+Standard → Intelligent-Tiering → Standard-IA → One Zone-IA
+        → Glacier Instant → Glacier Flexible → Deep Archive
+```
+
+- ❌ **不能用生命周期策略反向升级**（Glacier → Standard 做不到），要恢复必须先 Restore 再复制为新对象
+- ⚠️ 转 Standard-IA / One Zone-IA 要求对象**至少存在 30 天**
+- ⚠️ **小于 128 KB** 的对象转 IA 不划算，AWS 不会自动转
+
 ## 2. 生命周期策略
 
 - 自动在存储类型之间转换对象（如 30 天后转 IA，90 天后转 Glacier）
