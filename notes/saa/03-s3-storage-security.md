@@ -109,6 +109,65 @@ IAM Policy（用户侧）+ Bucket Policy（资源侧）+ ACL 综合评估：
 - 新建桶默认全部开启
 - **账户级别启用可覆盖所有桶** — 防止意外公开的最佳方案
 
+## 7.2 ⭐ S3 数据保护体系（防误删 / 合规保留）
+
+> TD Test 1 Q21 错题补充。此前笔记里 Versioning 只作为 CRR 前提出现过，MFA Delete 0 次。
+
+| 机制 | 防什么 | 前提 |
+|---|---|---|
+| ⭐ **Versioning** | **误删 / 误覆盖**，可恢复 | — |
+| ⭐ **MFA Delete** | **永久删除**需额外认证 | 先开 Versioning |
+| **Object Lock** | **合规保留 WORM** | 先开 Versioning |
+| **Replication (CRR/SRR)** | Region 级灾难 | 先开 Versioning |
+
+> 📌 **版本控制是后三者的共同前提。**
+
+### Versioning —— "删除"到底发生了什么
+
+```
+删除前：  file.txt (v1) ← 当前版本
+删除后：  file.txt (delete marker) ← 新的"当前版本"
+          file.txt (v1)            ← 还在，只是被遮住
+恢复：    删掉 delete marker → v1 重新成为当前版本 ✅
+```
+
+- ⚠️ **一旦启用不能关闭**，只能「暂停（Suspended）」
+- **永久删除**必须指定具体 **version ID**
+- ⚠️ **所有版本都计存储费** → 必须配 Lifecycle 清理旧版本
+
+### MFA Delete
+
+**要求 MFA 的两个操作**：① 永久删除某个对象版本　② 更改 bucket 版本控制状态
+
+| ⚠️ 限制 | 说明 |
+|---|---|
+| **只能由账号 root 用户启用** | 普通 IAM 用户不行 |
+| **只能用 CLI / API** | **控制台做不到** |
+
+### Object Lock 三种模式
+
+| 模式 | 谁能删 |
+|---|---|
+| **Governance** | 有 `s3:BypassGovernanceRetention` 权限的用户**可以**覆盖 |
+| ⭐ **Compliance** | **任何人都不能删改，包括 root**，直到保留期结束 |
+| **Legal Hold** | 无限期保留，直到显式移除 |
+
+### 判据
+
+| 题干 | 答案 |
+|---|---|
+| 防误删 / 恢复被删对象 | **Versioning** |
+| 防永久删除 / 删除需额外验证 | **Versioning + MFA Delete** |
+| ⭐ 合规 / **WORM** / 保留 N 年不可删改 / 监管 | **Object Lock（Compliance）** |
+| 防未授权访问 | Bucket Policy / IAM |
+| 防公网访问 | **Block Public Access** |
+
+> 🔴 **「用 Bucket Policy 禁止删除」是错的**——题目要"防意外删除"，不是"禁止所有删除"。
+> **AWS 偏好「保留能力 + 增加防护」，不是「直接砍掉能力」。**
+> 同类：防误删 EC2 → **终止保护**，不是撤销删除权限。
+
+---
+
 ## 7.5 ⭐ CORS（跨源资源共享）—— 浏览器机制，不是 AWS 机制
 
 > TD Test 1 Q20 错题补充。**触发词：browser + blocked + JavaScript。**
