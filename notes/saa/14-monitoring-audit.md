@@ -48,6 +48,15 @@
   EC2 的内存/磁盘需装 **CloudWatch Agent** 上报自定义指标 ← **超高频考点**
 - 基础监控 **5 分钟**；**详细监控 1 分钟**（收费）
 
+> 🔑 **托管服务你访问不到底层机器 → 装不了 agent、跑不了脚本**
+>
+> | 服务 | 能 SSH / 装 agent |
+> |---|---|
+> | **EC2** | ✅（所以内存指标要装 Agent） |
+> | **RDS / Aurora / ElastiCache / Lambda / Fargate** | ❌ **不能** |
+>
+> 选项出现「在 RDS 实例上安装 X」「在数据库服务器上跑脚本」→ **直接排除**。
+
 ### ② Logs（日志）
 
 - 日志组保留期：🚨 **默认永久**（不设置就一直计费）
@@ -73,6 +82,41 @@
 
 > 🔑 **排错信号**：「查明为什么 EC2 之间连不通 / 是谁在扫描端口」→ **VPC Flow Logs**
 > ⚠️ **不记录数据包内容**，只记录元数据。
+
+---
+
+## 2.5 ⭐ RDS 监控三层（TD Test 1 Q18 错题补充）
+
+三层看的是**完全不同的东西**，别混：
+
+```
+③ Performance Insights  —— 数据库引擎层：哪条 SQL 慢？等待事件？会话负载？
+② Enhanced Monitoring   —— 操作系统层：每个【进程/线程】的 CPU、内存（实例内 agent）
+① CloudWatch 标准指标   —— Hypervisor 层：整体 CPU、连接数、存储、IOPS（外部视角）
+```
+
+| | **CloudWatch** | **Enhanced Monitoring** | **Performance Insights** |
+|---|---|---|---|
+| 数据来自 | **Hypervisor**（外部） | ⭐ **实例内的 agent** | **数据库引擎** |
+| 看什么 | 整体资源使用 | ⭐ **每个进程/线程**的 CPU、内存 | ⭐ **SQL、等待事件、会话** |
+| 最细粒度 | 60 秒 | ⭐ **1 秒** | 秒级 |
+| 数据存哪 | CloudWatch Metrics | **CloudWatch Logs** 的 `RDSOSMetrics` 日志组（默认留 30 天） | PI 控制台 |
+| 典型指标 | CPUUtilization、DatabaseConnections、FreeableMemory、ReadIOPS、FreeStorageSpace、ReplicaLag | 进程/线程列表、CPU 细分、内存细分、文件系统、磁盘 IO | **DB Load (AAS)**、Top SQL、Top Waits |
+
+**判据：**
+
+| 题干 | 选 |
+|---|---|
+| CPU 利用率、连接数、可用存储、IOPS、副本延迟 | **CloudWatch** |
+| ⭐ **每个进程 / 每个线程**的 CPU 和内存、**OS 级别**、需**秒级**粒度 | **Enhanced Monitoring** |
+| ⭐ **哪条 SQL 慢**、查询调优、**等待事件**、数据库负载分析 | **Performance Insights** |
+
+> **记忆钩子**
+> CloudWatch = 从【外面】看这台机器用了多少资源
+> Enhanced Monitoring = 进到【操作系统里】看每个进程在干嘛
+> Performance Insights = 进到【数据库里】看每条 SQL 在干嘛
+
+⚠️ RDS 控制台**没有**现成的 `CPU%` / `MEM%` 进程级指标——必须先开 Enhanced Monitoring。
 
 ---
 
