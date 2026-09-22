@@ -143,6 +143,47 @@ IAM Policy（用户侧）+ Bucket Policy（资源侧）+ ACL 综合评估：
 - EFS 也有存储分层：Standard / Standard-IA / One Zone / One Zone-IA，可配生命周期策略
 - S3 不能被挂载为文件系统，不能替代 EFS 的共享文件场景
 
+> 🔴 **S3 生命周期 ≠ EFS 生命周期（高频陷阱）**
+>
+> | | **S3 Lifecycle** | **EFS Lifecycle Management** |
+> |---|---|---|
+> | Transition 转存储层 | ✅ Standard → IA → Glacier… | ✅ Standard ↔ IA ↔ Archive |
+> | **Expiration 删除文件** | ⭐ **✅ 能删** | ❌ **不能删，只能转层** |
+> | **转换周期上限** | ⭐ **无上限**（任意天数） | ⚠️ **最长 365 天**（最短 1 天） |
+> | 其他 | 删旧版本、中止未完成分段上传 | 无 |
+>
+> **两条排除 EFS 的硬判据：**
+> - 题干要求「N 天后自动**删除**」→ 必须 S3
+> - 题干要求转换周期 **超过 1 年**（如"2 年后转冷存储"= 730 天）→ 必须 S3
+
+### 各服务的「自动删除」机制（别把 S3 的概念套到别处）
+
+| 服务 | 机制 | 能删 |
+|---|---|---|
+| **S3** | Lifecycle rule → **Expiration action** | ✅ |
+| **EFS** | 无删除功能 | ❌ |
+| **DynamoDB** | **TTL**（按时间戳属性自动删项） | ✅ |
+| **CloudWatch Logs** | **Retention setting**（保留天数） | ✅ |
+| **EBS 快照** | **DLM**（Data Lifecycle Manager） | ✅ |
+| **ECR 镜像** | **ECR Lifecycle Policy** | ✅ |
+| **RDS 备份** | **Backup retention period**（1–35 天） | ✅ |
+| **Kinesis Data Streams** | **Retention period**（默认 24h，最长 365 天） | ✅ |
+
+---
+
+## 9.5 AWS Transfer Family
+
+| 项目 | 内容 |
+|------|------|
+| **协议** | **SFTP / FTPS / FTP / AS2** |
+| **后端存储** | **S3 或 EFS**（两者都支持） |
+| **认证** | 服务托管 / AD / 自定义 IdP（Lambda + API Gateway） |
+| **运维** | ⭐ 全托管，**无需管理 SFTP 服务器**；跨多 AZ 高可用 |
+| ⚠️ **没有的功能** | **没有 retention policy** —— 数据保留/删除要在**后端存储**上配 |
+
+**关键词**：`SFTP / FTPS / FTP` + `不想管服务器` → **AWS Transfer Family**
+⚠️ 看到「在 EC2 上装 SFTP 服务 + cron 清理」→ 运维最重，`least operational overhead` 题里一律排除。
+
 ---
 
 ## 10. Storage Gateway — 混合云存储桥梁
