@@ -109,6 +109,47 @@ IAM Policy（用户侧）+ Bucket Policy（资源侧）+ ACL 综合评估：
 - 新建桶默认全部开启
 - **账户级别启用可覆盖所有桶** — 防止意外公开的最佳方案
 
+## 7.5 ⭐ CORS（跨源资源共享）—— 浏览器机制，不是 AWS 机制
+
+> TD Test 1 Q20 错题补充。**触发词：browser + blocked + JavaScript。**
+
+**问题**：浏览器的**同源策略**规定 JS 只能向"同源"发请求。
+**同源 = 协议 + 域名 + 端口 三者完全相同。**
+
+⚠️ **同一个 bucket 也可能算跨源**，因为 S3 有两种端点域名：
+
+| 端点 | 域名 |
+|---|---|
+| **静态网站托管端点** | `<bucket>.s3-website-<region>.amazonaws.com` |
+| **REST API 端点** | `<bucket>.s3.amazonaws.com` |
+
+网页从网站端点加载、JS 去调 API 端点 → **域名不同 → 被浏览器拦截**。
+
+**解法**：在 bucket 上配置 CORS 规则，声明允许哪些来源。
+
+```json
+[{
+  "AllowedOrigins": ["http://mysite.s3-website-us-east-1.amazonaws.com"],
+  "AllowedMethods": ["GET"],
+  "AllowedHeaders": ["*"],
+  "MaxAgeSeconds": 3000
+}]
+```
+
+**CORS 在 AWS 里出现的位置**：S3、**API Gateway**（前端调 API 报 CORS 错 → 在资源上启用）、
+CloudFront（需转发 `Origin` 头并加入缓存键）、AppSync。
+
+🔴 **别和这三个混**（它们都以 `Cross-` 开头但毫无关系）：
+
+| | 领域 | 作用 |
+|---|---|---|
+| **CORS** Cross-**Origin** | 浏览器安全 | 允许跨域名的 JS 请求 |
+| **CRR** Cross-**Region** Replication | S3 复制 | 复制对象到另一 Region |
+| **Cross-account access** | IAM | 跨 AWS 账号授权 |
+| **Cross-Zone Load Balancing** | ELB | 流量分到所有 AZ |
+
+---
+
 ## 8. S3 Access Points
 
 - 为桶创建多个独立入口，每个入口有独立的 DNS 名称和访问策略

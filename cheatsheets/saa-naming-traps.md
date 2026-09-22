@@ -163,6 +163,29 @@ API
 
 ---
 
+# 五点五、`Cross-` 家族（四个完全无关的东西）
+
+> **实战踩坑**：TD Test 1 Q20 四个选项全部以 `Cross-` 开头，分属四个领域。
+
+| 名称 | 领域 | 作用 | 触发词 |
+|---|---|---|---|
+| ⭐ **CORS**<br>Cross-**Origin** Resource Sharing | **浏览器安全** | 允许网页 JS 访问**不同域名**的资源 | ⭐ **browser** + **blocked** + **JavaScript**<br>`No 'Access-Control-Allow-Origin' header` |
+| **CRR**<br>Cross-**Region** Replication | **S3 复制** | 对象自动复制到**另一个 Region** 的 bucket | 灾备、合规、跨区低延迟访问 |
+| **Cross-account access** | **IAM** | **跨 AWS 账号**授权（用 Role + 资源策略） | 另一个账号要访问我的资源 |
+| **Cross-Zone Load Balancing** | **ELB** | 把流量分到**所有 AZ** 的目标 | ELB 各 AZ 负载不均 |
+
+> 🔑 **`Cross-` 只是"跨"，跨什么才是关键。**
+> 三词同现 **browser / blocked / JavaScript** → **必定 CORS**。
+
+**CORS 在 AWS 里出现的位置**：S3（bucket CORS 配置）、**API Gateway**（资源上启用 CORS）、
+CloudFront（需转发 `Origin` 头并加入缓存键）、AppSync。
+
+**S3 的两种端点域名不同 → 同一个 bucket 也算跨源**：
+- 静态网站端点：`<bucket>.s3-website-<region>.amazonaws.com`
+- REST API 端点：`<bucket>.s3.amazonaws.com`
+
+---
+
 # 六、其他被复用的主词
 
 | 主词 | 完全不同的东西 |
