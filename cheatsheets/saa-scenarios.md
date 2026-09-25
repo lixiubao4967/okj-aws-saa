@@ -157,6 +157,40 @@
 | 会话存储 / 排行榜 / Pub-Sub | **ElastiCache Redis** |
 | 纯缓存 / 多线程 / 可水平分片 | **ElastiCache Memcached** |
 
+#### 🔴 专用数据库（按数据形态，别混）
+
+| 信号词 | 答案 |
+|---|---|
+| ⭐ **`MongoDB`** / JSON 文档 / 从 MongoDB 迁移 | **DocumentDB** |
+| ⭐ **`Cassandra`** / 宽列 | **Keyspaces** |
+| ⭐ **图 / `社交关系` / `推荐引擎` / 知识图谱 / 欺诈关系网** | **Neptune** |
+| ⭐ **`时序` / IoT 传感器 / 按时间的指标** | **Timestream** |
+| ⭐ **`不可篡改` / 加密验证的完整变更历史 / 账本** | **QLDB** |
+| **内存速度 + 数据不能丢**（当主库用，不只是缓存） | **MemoryDB for Redis** |
+| Oracle / SQL Server / MariaDB / Db2 | ⭐ **只能 RDS**（Aurora 不支持这些引擎） |
+
+#### 🔴 复制机制：只有一个是「同步」
+
+| 机制 | 同步/异步 | 目的 | 备库可读 |
+|---|---|---|---|
+| ⭐ **RDS Multi-AZ** | ⭐ **同步** | **高可用** | ❌ **不可读** |
+| RDS Read Replica | 异步 | 读扩展 | ✅ |
+| Aurora Replica | 异步（<100ms） | 读扩展 + 高可用 | ✅ |
+| Aurora Global Database | 异步（**<1 秒**） | 跨 Region 灾备 | ✅ |
+| DynamoDB Global Tables | 异步（秒级） | 多区域多活 | ✅ |
+
+> 🔑 题干出现 **`synchronous`（同步复制）** → **只能是 RDS Multi-AZ**。
+> ⚠️ **Multi-AZ 的 standby 不能读**——"用 Multi-AZ 备库分担读流量"永远是错的。
+
+#### 📌 RPO / RTO 速查
+
+| 方案 | RPO | RTO |
+|---|---|---|
+| RDS Multi-AZ | **0**（同步） | 1–2 分钟 |
+| RDS 跨区只读副本 | ⚠️ 分钟级 | 手动提升，分钟级 |
+| ⭐ **Aurora Global Database** | ⭐ **~1 秒** | ⭐ **<1 分钟** |
+| DynamoDB Global Tables | 秒级 | 近乎 0（多活） |
+
 ### 应用集成
 
 | 信号词 | 答案 |
