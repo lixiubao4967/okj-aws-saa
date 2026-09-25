@@ -77,6 +77,29 @@
 
 ---
 
+## 3.5 ⭐ Aurora 四种端点（TD Test 1 Q28 错题）
+
+| 端点 | 指向哪 | 用途 |
+|---|---|---|
+| **Cluster Endpoint**（= Writer） | **当前主实例** | 读写、DDL；**故障转移后自动指向新主** |
+| **Reader Endpoint** | **所有只读副本**，自动负载均衡 | 一般读操作 |
+| ⭐ **Custom Endpoint** | **你自己指定的一组实例** | ⭐ **按实例规格/参数组分流** |
+| **Instance Endpoint** | **某一个特定实例** | 诊断、调优 |
+
+**触发词：**
+
+| 题干 | 选 |
+|---|---|
+| 写入 / DDL / 主库 | Cluster (Writer) Endpoint |
+| 读扩展 / 自动均衡**所有**副本 | Reader Endpoint |
+| ⭐ **按实例规格分流**、不同用户群走不同实例、**报表用专用低配实例** | **Custom Endpoint** |
+| 连特定实例做诊断调优 | Instance Endpoint |
+
+> 🔑 **"把 A 类流量导到 X 组实例，B 类导到 Y 组" → Custom Endpoint**，没有第二个答案。
+> ⚠️ Reader Endpoint 在**所有**副本间均衡，**分不清实例规格**；Aurora **默认也不会**做这种智能分流。
+
+---
+
 ## 4. 考试高频场景速查
 
 | 场景 | 选什么 |
