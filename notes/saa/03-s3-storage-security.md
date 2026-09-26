@@ -177,13 +177,53 @@ IAM Policy（用户侧）+ Bucket Policy（资源侧）+ ACL 综合评估：
 | **只能由账号 root 用户启用** | 普通 IAM 用户不行 |
 | **只能用 CLI / API** | **控制台做不到** |
 
-### Object Lock 三种模式
+### ⭐ Object Lock —— 两个独立维度（别混成"三种模式"）
 
-| 模式 | 谁能删 |
+```
+① 保护机制（可单用，也可并存）
+   ├─ Retention Period（保留期）——【有】时间期限，到期自动解除
+   └─ Legal Hold（法律保留）  ——【无】时间期限，必须手动移除
+
+② 模式 ⚠️【只有 Retention Period 才有模式，Legal Hold 没有模式】
+   ├─ Governance —— 有特权可绕过
+   └─ Compliance —— 任何人包括 root 都不能
+```
+
+| | ⭐ **Retention Period** | **Legal Hold** |
+|---|---|---|
+| **有时间期限吗** | ⭐ **有**（到期日或天数） | ❌ **没有，无限期** |
+| **怎么解除** | **到期自动解除** | ⭐ **必须显式移除** |
+| **有模式区分吗** | ⭐ **有**（Governance/Compliance） | ❌ **没有模式概念** |
+| 谁能解除 | Compliance：谁都不能提前解<br>Governance：有特权可绕过 | 有 `s3:PutObjectLegalHold` 权限的人 |
+
+**Governance 模式的绕过条件（两个都要）：**
+`s3:BypassGovernanceRetention` 权限 ＋ 请求头 `x-amz-bypass-governance-retention: true`
+
+**其他要点：**
+- ⚠️ **必须在创建 bucket 时启用**（考试按这个记）
+- ⚠️ **启用后版本控制不能暂停**
+- ⚠️ **Compliance 模式下保留期只能延长不能缩短**，模式也不能改
+- 两者并存时：保留期到期后，若还有 legal hold，**对象仍受保护**
+
+### 判据
+
+| 题干 | 答案 |
 |---|---|
-| **Governance** | 有 `s3:BypassGovernanceRetention` 权限的用户**可以**覆盖 |
-| ⭐ **Compliance** | **任何人都不能删改，包括 root**，直到保留期结束 |
-| **Legal Hold** | 无限期保留，直到显式移除 |
+| ⭐ **明确时间期限**（"one year only"） | **Retention Period** |
+| ⭐ **无限期 / 直到调查结束 / 诉讼期间** | **Legal Hold** |
+| ⭐ **root user 也不能改** / SEC / FINRA / 严格监管 | **Compliance 模式** |
+| 防大多数人误删，但管理员可处理 | **Governance 模式** |
+
+### ⚠️ S3 Object Lock vs AWS Backup Vault Lock
+
+| | **S3 Object Lock** | **AWS Backup Vault Lock** |
+|---|---|---|
+| 保护什么 | ⭐ **S3 里的对象**（object-level） | ⭐ **AWS Backup 保管库里的备份** |
+| 覆盖范围 | 单个 S3 bucket | ⭐ **跨服务**：EBS/RDS/DynamoDB/EFS/FSx/EC2… |
+| 粒度 | 对象版本级 | 保管库级 |
+| 特有机制 | **Legal Hold** | ⭐ **冷静期（cooling-off，最少 3 天）**，过后永久生效 |
+
+**判据**：保护 S3 对象 → Object Lock；保护各服务的备份 → Vault Lock。
 
 ### 判据
 
