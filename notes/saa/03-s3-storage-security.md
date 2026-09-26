@@ -200,8 +200,12 @@ IAM Policy（用户侧）+ Bucket Policy（资源侧）+ ACL 综合评估：
 `s3:BypassGovernanceRetention` 权限 ＋ 请求头 `x-amz-bypass-governance-retention: true`
 
 **其他要点：**
-- ⚠️ **必须在创建 bucket 时启用**（考试按这个记）
-- ⚠️ **启用后版本控制不能暂停**
+- ⚠️ **启用后不可关闭**（Object Lock 本身无法禁用，只能调整保留期/legal hold 设置）
+- ⚠️ **启用后版本控制不能暂停或禁用**（Object Lock 依赖 Versioning）
+  → 「Enable Object Lock 但 disable Versioning」是**自相矛盾**的选项
+- 📌 关于启用时机：**旧说法是"只能在创建 bucket 时启用"**，
+  现在 AWS 已支持**对已有 bucket 启用**。题目两种说法都可能出现，
+  **重点记"启用后不可关闭 + 版本控制不能关"**，这两条是稳定的
 - ⚠️ **Compliance 模式下保留期只能延长不能缩短**，模式也不能改
 - 两者并存时：保留期到期后，若还有 legal hold，**对象仍受保护**
 
@@ -289,7 +293,20 @@ CloudFront（需转发 `Origin` 头并加入缓存键）、AppSync。
 - 可限制只允许从特定 VPC 访问（网络隔离）
 - 桶 Policy 可设为"只允许通过 Access Point 访问"，防止绕过
 
-**选型：** 2-3 个简单规则用 Bucket Policy；团队多/策略复杂用 Access Points
+**两种网络类型：**
+
+| 类型 | 访问范围 |
+|---|---|
+| **Internet** | 可从公网访问 |
+| ⭐ **VPC** | ⭐ **只能从指定 VPC 访问** |
+
+> 🔑 **触发词：题干出现「限制 S3 访问只能来自某个 VPC」→ S3 Access Point（VPC 类型）**
+> ⚠️ 不是 Network Firewall（它保护 VPC 内流量，**挂不到 S3 上**）
+
+**Multi-Region Access Point**：一个**全局端点**，用 **Global Accelerator**
+自动路由到**延迟最低**的 Region 的 bucket。触发词：`多区域 S3` + `单一全局端点`。
+
+**选型：** 2-3 个简单规则用 Bucket Policy；团队多/策略复杂/**要按 VPC 隔离**用 Access Points
 
 ---
 
