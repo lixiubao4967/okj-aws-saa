@@ -393,6 +393,54 @@ CloudFront（需转发 `Origin` 头并加入缓存键）、AppSync。
 
 ---
 
+## 10.5 ⭐ S3 上传加速：Transfer Acceleration + Multipart Upload
+
+> TD Test 1 Q59 错题 —— 原笔记完全未覆盖（只在测验干扰项里出现过）。
+
+### S3 Transfer Acceleration（传输加速）
+
+```
+❌ 不开：东京客户端 ──跨太平洋公网──→ 弗吉尼亚 S3   慢、丢包
+✅ 开启：东京客户端 → [最近的 CloudFront 边缘节点]
+                          ↓ ⭐ 走 AWS 骨干网
+                     弗吉尼亚 S3
+```
+
+| 项目 | 内容 |
+|---|---|
+| 原理 | 上传先到**最近的边缘节点**，再走 **AWS 骨干网**回目标 bucket |
+| 提速 | **50–500%**（距离越远、文件越大越明显） |
+| 专用端点 | `bucket.**s3-accelerate**.amazonaws.com` |
+| 费用 | ⚠️ **额外收费** |
+| 限制 | bucket 名不能含点号 `.` |
+
+⚠️ **同 Region 内上传开了反而可能更慢**；AWS 有速度对比工具，没变快就别开。
+
+### Multipart Upload（分段上传）
+
+| 项目 | 内容 |
+|---|---|
+| 好处 | ⭐ **并行上传**、**失败只重传那一片**、可暂停恢复 |
+| 建议阈值 | **> 100 MB 建议用** |
+| ⭐ 强制阈值 | **> 5 GB 必须用**（单次 PUT 上限 5 GB） |
+| 单对象上限 | **5 TB** |
+| ⚠️ 坑 | 中断的分段**会一直占存储费** → 用 Lifecycle 规则自动清理 |
+
+### 📌 数据上云方式判据
+
+| 题干 | 选 |
+|---|---|
+| ⭐ **网络好**（`high-speed Internet`）+ 全球分散 + 大文件传 S3 | ⭐ **Transfer Acceleration + Multipart Upload** |
+| ⚠️ **带宽不够 / PB 级 / 要传几周** | **Snow Family** |
+| 本地 NFS/SMB 批量迁移 / **定期同步** | **DataSync** |
+| 本地应用**持续**访问云存储 + **本地缓存** | **Storage Gateway** |
+| 外部用户用 **SFTP/FTPS** 上传 | **Transfer Family** |
+
+> 🔑 **`one-time`（一次性）→ 不用 DataSync**（配 agent、配源和目标太重）
+> 🔑 **`high-speed Internet` → 不用 Snowball**（网络不是瓶颈）
+
+---
+
 ## 11. Snow 系列 — 大规模离线数据迁移
 
 | 设备 | 容量 | 特点 | 典型场景 |
