@@ -439,6 +439,41 @@ CloudFront（需转发 `Origin` 头并加入缓存键）、AppSync。
 > 🔑 **`one-time`（一次性）→ 不用 DataSync**（配 agent、配源和目标太重）
 > 🔑 **`high-speed Internet` → 不用 Snowball**（网络不是瓶颈）
 
+### 🆕 AWS Data Transfer Terminal（2024 年新服务，TD Test 2 已考两次）
+
+| 项目 | 内容 |
+|---|---|
+| 是什么 | ⭐ **AWS 的实体设施**，配高带宽直连 |
+| 怎么用 | 控制台**预约** → **带自己的存储设备**去 → 现场高速上传 → 带设备离开 |
+| 解决什么 | ⭐ **绕过自己的网络带宽瓶颈** |
+| ⚠️ 限制 | **只在特定城市有站点** |
+
+**vs Snow Family：**
+
+| | **Data Transfer Terminal** | **Snow Family** |
+|---|---|---|
+| 谁移动 | **你带设备去 AWS 站点** | **AWS 寄设备给你** |
+| 速度 | ⭐ **更快**（现场直连，当天完成） | 慢（快递往返，几天~几周） |
+| 覆盖 | ⚠️ 站点有限 | ⭐ 全球快递可达 |
+
+### 📌 数据上云完整决策树
+
+```
+① 按现有带宽算：传完要多久？
+     │
+     ├─ 超过约【一周】→ 🚚 物理传输
+     │      ├─ 附近有站点 + 设备便携 → Data Transfer Terminal
+     │      └─ 其他 → Snow Family
+     │
+     └─ 网络够快 ↓
+          ├─ 全球分散 + 大文件传 S3 → Transfer Acceleration + Multipart
+          ├─ 本地 NFS/SMB 批量迁移/定期同步 → DataSync
+          ├─ 本地持续访问云存储 + 本地缓存 → Storage Gateway
+          └─ 外部用户 SFTP 上传 → Transfer Family
+```
+
+⚠️ **Direct Connect 不是一次性迁移方案**：开通要数周~数月，且是**长期专线**。
+
 ---
 
 ## 11. Snow 系列 — 大规模离线数据迁移
