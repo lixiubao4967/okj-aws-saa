@@ -1,6 +1,6 @@
 # AWS 认证学习计划 | OKJ AWS SAA → SAP
 
-> 目标：先通过 **AWS Certified Solutions Architect - Associate (SAA-C03)**，再进阶 **AWS Certified Solutions Architect - Professional (SAP-C02)**
+> 目标：先通过 **AWS Certified Solutions Architect - Associate (SAA-C03)**，再进阶 **AWS Certified Solutions Architect - Professional (SAP-C03)**
 
 > 🎉 **SAA-C03 已通过：740 / 1000**（2026-10-04）→ 复盘见 `practice/saa/13-real-exam-result.md`
 
@@ -9,7 +9,7 @@
 ## 学习路线总览
 
 ```
-SAA-C03 (约 8-12 周)  →  SAP-C02 (约 8-12 周)
+SAA-C03 ✅ 740（2026-10-04）  →  SAP-C03（2026-10-05 起，目标 2027-01-16）
 ```
 
 ---
@@ -47,7 +47,7 @@ SAA-C03 (约 8-12 周)  →  SAP-C02 (约 8-12 周)
 
 > Order # / Registration ID 见确认邮件，不记录在此仓库。
 
-### 报名要点（备忘，供 SAP-C02 复用）
+### 报名要点（备忘，供 SAP-C03 复用）
 
 1. https://aws.amazon.com/certification/ → **AWS Certification Account**（AWS Builder ID 登录）→ Schedule an Exam → Pearson VUE
 2. **先申请 ESL +30 分钟延时，再订考位** —— 英文卷且英语非母语可免费申请（130 → 160 分钟），必须在预约前于 Exam accommodations 里提交。已申请过，SAP 时不用再申请
@@ -310,40 +310,87 @@ SAA-C03 (约 8-12 周)  →  SAP-C02 (约 8-12 周)
 
 ---
 
-## 第二阶段：SAP-C02 Professional（约 10 周，SAA 通过后开始）
+## 第二阶段：SAP-C03 Professional（2026-10-05 起，目标 2027-01 中旬考）
+
+> 🔄 **2026-10-05 决定考 SAP-C03，不赶 SAP-C02**（C02 只剩 6 周，SAA 740 且 D3 偏弱，时间太紧）。
+
+### 版本切换时间线
+
+| 日期 | 事件 |
+|------|------|
+| **2026-10-27** | **SAP-C03 开放报名** + 官方 Exam Guide 公布（含各域权重和 task statements） |
+| 2026-11-16 | SAP-C02 最后考试日 |
+| **2026-11-17** | **SAP-C03 正式上线（GA）**，最早能考的日子；无 beta 阶段 |
 
 ### 考试信息
 
 | 项目 | 内容 |
 |------|------|
-| 考试代码 | SAP-C02 |
-| 前提条件 | 持有效 AWS Associate 级别认证 |
+| 考试代码 | **SAP-C03** |
+| 前提条件 | 官方无强制要求（已持 SAA-C03） |
 | 题目数量 | 75 道（单/多选） |
-| 考试时长 | 180 分钟 |
-| 通过分数 | 750 / 1000 |
-| 考试费用 | $300 USD |
+| 考试时长 | 180 分钟（**ESL +30 已永久生效 → 210 分钟**，以预约页显示为准） |
+| 通过分数 | 750 / 1000（C02 标准，C03 待 Exam Guide 确认） |
+| 考试费用 | $300 USD → **用 SAA 合格的 50% 折扣券**，约 ¥22,000 |
 | 有效期 | 3 年 |
 
-### SAP-C02 考试域分布
+### 📝 报名步骤（10/27 起）
+
+1. **10/27 当天**：先读官方 Exam Guide，按实际域权重修正下面的周计划
+2. CertMetrics → **BENEFITS** → 复制 **50% discount** 折扣码（顺便确认券的到期日）
+3. Schedule an exam → **SAP-C03** → In person at a test center → 选考场和日期
+4. 付款页把折扣码填进 **Voucher / Promotion Code** → 确认金额是半价再付款
+5. 收据只发邮件（Pearson VUE → My account → My receipts 可以 Resend）
+
+> 💡 **10/27 当天就订考位**，作为倒计时的压力开关（SAA 时这招有效）。
+> 改期是免费的（考前 24h 以上、每个考位最多改 2 次），所以早订不亏。
+> 目标日期：**2027-01-16（土）**左右。避开年末年始，前面留出两周缓冲。
+
+### SAP-C03 考试域（权重 10/27 公布后补）
 
 | 领域 | 占比 |
 |------|------|
-| Domain 1: Design Solutions for Organizational Complexity | 26% |
-| Domain 2: Design for New Solutions | 29% |
-| Domain 3: Continuous Improvement for Existing Solutions | 25% |
-| Domain 4: Accelerate Workload Migration and Modernization | 20% |
+| Domain 1: Cloud-native architecture design and implementation | 待公布 |
+| Domain 2: Security, compliance, and governance | 待公布 |
+| Domain 3: Cost-optimized architecture design | 待公布 |
+| Domain 4: Resilience, migration, and business continuity | 待公布 |
+| Domain 5: Operational excellence and automation | 待公布 |
 
-### SAP 进阶重点（相比 SAA 的深化方向）
+> C02 是 4 个域（组织复杂性 / 新方案 / 持续改进 / 迁移），C03 改成按 Well-Architected 支柱划分的 5 个域。
+> **C03 新增内容**：生成式 AI / Agentic AI（Bedrock、Bedrock AgentCore、RAG、Guardrails、人工审核流程）、
+> 后量子加密、韧性即服务 + **AWS Fault Injection Service**、DevSecOps 自动化、Serverless 模式、数据湖仓（Lakehouse）。
 
-- [ ] 多账户管理：AWS Organizations、SCP、OU 设计
-- [ ] 混合云架构：Direct Connect、VPN、Transit Gateway 复杂拓扑
-- [ ] 大规模数据迁移：Database Migration Service、Application Migration Service
-- [ ] 高级安全架构：IAM 权限边界、ABAC、跨账户角色链
-- [ ] 成本优化高级策略：预留实例组合、Savings Plans 最优化
-- [ ] 灾难恢复策略：RTO/RPO 与 Backup/Pilot Light/Warm Standby/Multi-Site
-- [ ] Well-Architected Framework 五大支柱深度理解
-- [ ] 微服务 + 容器高级架构（Service Mesh、EKS 网络）
-- [ ] 机器学习服务集成：SageMaker、Rekognition、Comprehend 架构应用
+### 📚 SAA 阶段学到的学习方法（SAP 必须沿用）
+
+1. ⭐ **每天开头 10 分钟复习前一天的内容**：SAA 时出现过「补了笔记，两天后照样错」
+2. **真题校准提前**：SAA 时 Claude 出的分模块测验打到 93-100%，TD 第一套只有 38%。SAP 从第 1 周就做官方样题测基线，**每个模块学完都配真题**
+3. **交叉练习**：同类知识集中练会让分数虚高（SQS 模块测验 12/12，官方题 1/3），每周至少做一次混合题
+4. **回读验证**：选完答案后回到题干逐句核对。SAP 题干更长，这一步更关键
+5. **优先补 D3 高性能**：SAA 真考里唯一 Needs Improvement 的域
+
+### 🗓️ SAP-C03 周计划（2026-10-05 → 2027-01-16）
+
+| 周 | 日期 | 内容 | 对应 C03 域 |
+|---|---|---|---|
+| W1 | 10/05–10/11 | **基线诊断**：官方 SAP 样题（计时）+ 补 SAA D3 弱项（缓存 / 数据库性能 / 弹性计算） | — |
+| W2 | 10/12–10/18 | 多账户治理：Organizations、SCP/RCP、Control Tower、IAM Identity Center、RAM、跨账户角色 | D2 |
+| W3 | 10/19–10/25 | 高级安全：权限边界、ABAC、KMS 多区域 / 跨账户、Security Hub 汇总、**后量子加密** | D2 |
+| W4 | 10/26–11/01 | 🔔 **10/27 读 Exam Guide + 报名订考位**；混合网络：TGW 拓扑、DX（LAG/SiteLink/DX Gateway）、Route 53 Resolver、PrivateLink | D1/D4 |
+| W5 | 11/02–11/08 | 韧性与 DR：四档 DR 的 RTO/RPO、Aurora Global、DynamoDB Global Tables、Elastic Disaster Recovery、**FIS** | D4 |
+| W6 | 11/09–11/15 | 迁移：7R、Migration Hub、MGN、DMS/SCT、DataSync、Snow 系列、Transfer Family | D4 |
+| W7 | 11/16–11/22 | 云原生：Serverless 模式（Step Functions、EventBridge Pipes）、容器（EKS 网络、ECS 进阶）、**数据湖仓**（Lake Formation、S3 Tables） | D1 |
+| W8 | 11/23–11/29 | 🆕 **GenAI 专项**：Bedrock、Knowledge Bases（RAG）、Guardrails、AgentCore、人工审核流程 | D1 |
+| W9 | 11/30–12/06 | 成本：Savings Plans / RI 组合、CUR、Compute Optimizer、多账户成本分摊 | D3 |
+| W10 | 12/07–12/13 | 运维卓越与 DevSecOps：CodePipeline、CloudFormation StackSets、Systems Manager、Config 合规自动修复 | D5 |
+| W11 | 12/14–12/20 | **整套模拟 ①②**（TD SAP，有 C03 版就用 C03）+ 逐题复盘 | 全 |
+| W12 | 12/21–12/27 | 模拟 ③ + 按模拟成绩补最弱的两个域 | 全 |
+| 年末 | 12/28–01/04 | 轻量复习：每天只读错题本 + cheatsheet（不学新内容） | — |
+| W13 | 01/05–01/10 | 模拟 ④ + 写考前速查表 `cheatsheets/sap-*.md` | 全 |
+| 考前 | 01/11–01/15 | 只看错题和速查表，早睡 | — |
+| 🎯 | **01/16（土）** | **SAP-C03 考试** | |
+
+> ⚠️ 判断能不能考的标准（**看到成绩之前先定下**）：TD 模拟**连续两套 ≥ 75%** 才按期考，否则用免费改期往后推。
+> ⚠️ 第三方的 C03 题库刚上线时题少、质量也不稳；重合的内容可以先用 TD 的 SAP-C02 题练。
 
 ---
 
@@ -393,10 +440,7 @@ okj-aws-saa/
 │   │   ├── 15-security-services.md # WAF/Shield/GuardDuty/Inspector/Macie/SecurityHub
 │   │   ├── 16-containers.md   # ECS/EKS/Fargate + ECR + App Runner
 │   │   └── 17-iac-cost.md     # CloudFormation/Beanstalk + 成本优化
-│   └── sap/               # SAP-C02 进阶笔记
-│       ├── 01-organizations.md
-│       ├── 02-hybrid-network.md
-│       └── 03-migration.md
+│   └── sap/               # SAP-C03 进阶笔记（按周计划逐篇添加）
 ├── practice/
 │   ├── saa/               # SAA 错题本 + 模拟记录
 │   │   ├── 01-week1-2-errors.md
@@ -430,9 +474,10 @@ okj-aws-saa/
 - [x] SAA-C03 报名 ✅ 已预约 **2026-09-26（土）11:30 JST**，新桥国际会馆考场
 - [ ] SAA-C03 模拟题通过率 > 80%
 - [x] SAA-C03 通过 🎉 **740/1000**（2026-10-04）
-- [ ] SAP-C02 学习中
-- [ ] SAP-C02 模拟题通过率 > 80%
-- [ ] SAP-C02 报名
-- [ ] SAP-C02 通过
+- [x] SAP 版本决定：考 **SAP-C03**（2026-10-05）
+- [ ] SAP-C03 学习中（W1 基线诊断）
+- [ ] SAP-C03 报名（**2026-10-27 开放**，使用 50% 折扣券）
+- [ ] SAP-C03 TD 模拟连续两套 ≥ 75%
+- [ ] SAP-C03 通过
 </content>
 </invoke>
