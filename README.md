@@ -337,7 +337,9 @@ SAA-C03 ✅ 740（2026-10-04）  →  SAP-C03（2026-10-05 起，目标 2027-01-
 ### 📝 报名步骤（10/27 起）
 
 1. **10/27 当天**：先读官方 Exam Guide，按实际域权重修正下面的周计划
-2. CertMetrics → **BENEFITS** → 复制 **50% discount** 折扣码（顺便确认券的到期日）
+2. [CertMetrics](https://cp.certmetrics.com/amazon/) → **BENEFITS → Certification benefits** → 「50% Discount on your next Exam」卡片点 **CLAIM BENEFIT** 生成折扣码并复制（生成后再看一眼折扣码自己的有效期）
+   - ✅ 2026-10-24 已确认：券状态 Active，**Benefit 到期日 2029-10-04**（与 SAA 证书同期），1/16 无冲突；折扣码**尚未生成**（Voucher/Code 显示「—」）
+   - 同页另一张「SME Program」卡片是 AWS 招募持证人当出题 / 审题志愿者，与报名无关，忽略
 3. Schedule an exam → **SAP-C03** → In person at a test center → 选考场和日期
 4. 付款页把折扣码填进 **Voucher / Promotion Code** → 确认金额是半价再付款
 5. 收据只发邮件（Pearson VUE → My account → My receipts 可以 Resend）
