@@ -368,28 +368,31 @@ SAA-C03 ✅ 740（2026-10-04）  →  SAP-C03（2026-10-05 起，目标 2027-01-
 4. **回读验证**：选完答案后回到题干逐句核对。SAP 题干更长，这一步更关键
 5. **优先补 D3 高性能**：SAA 真考里唯一 Needs Improvement 的域
 
-### 🗓️ SAP-C03 周计划（2026-10-05 → 2027-01-16）
+### 🗓️ SAP-C03 周计划（2026-10-24 压缩版 → 2027-01-16）
+
+> 🔄 **2026-10-24 重排**：10/11 起暂停，原 W2（多账户治理）/ W3（高级安全）实际没学，相当于丢了两周。
+> 决定**考期保持 1/16 不变，压缩计划**：W1 基线诊断已由「官方样题 10 题逐题精读考点」替代；成本 + 运维合并为一周；模拟考从 3 周减到 2 周 + 年末。
+> 10/27 Exam Guide 公布域权重后，再按权重微调各周时间分配。
 
 | 周 | 日期 | 内容 | 对应 C03 域 |
 |---|---|---|---|
-| W1 | 10/05–10/11 | **基线诊断**：官方 SAP 样题（计时）+ 补 SAA D3 弱项（缓存 / 数据库性能 / 弹性计算） | — |
-| W2 | 10/12–10/18 | 多账户治理：Organizations、SCP/RCP、Control Tower、IAM Identity Center、RAM、跨账户角色 | D2 |
-| W3 | 10/19–10/25 | 高级安全：权限边界、ABAC、KMS 多区域 / 跨账户、Security Hub 汇总、**后量子加密** | D2 |
-| W4 | 10/26–11/01 | 🔔 **10/27 读 Exam Guide + 报名订考位**；混合网络：TGW 拓扑、DX（LAG/SiteLink/DX Gateway）、Route 53 Resolver、PrivateLink | D1/D4 |
-| W5 | 11/02–11/08 | 韧性与 DR：四档 DR 的 RTO/RPO、Aurora Global、DynamoDB Global Tables、Elastic Disaster Recovery、**FIS** | D4 |
-| W6 | 11/09–11/15 | 迁移：7R、Migration Hub、MGN、DMS/SCT、DataSync、Snow 系列、Transfer Family | D4 |
-| W7 | 11/16–11/22 | 云原生：Serverless 模式（Step Functions、EventBridge Pipes）、容器（EKS 网络、ECS 进阶）、**数据湖仓**（Lake Formation、S3 Tables） | D1 |
-| W8 | 11/23–11/29 | 🆕 **GenAI 专项**：Bedrock、Knowledge Bases（RAG）、Guardrails、AgentCore、人工审核流程 | D1 |
-| W9 | 11/30–12/06 | 成本：Savings Plans / RI 组合、CUR、Compute Optimizer、多账户成本分摊 | D3 |
-| W10 | 12/07–12/13 | 运维卓越与 DevSecOps：CodePipeline、CloudFormation StackSets、Systems Manager、Config 合规自动修复 | D5 |
-| W11 | 12/14–12/20 | **整套模拟 ①②**（TD SAP，有 C03 版就用 C03）+ 逐题复盘 | 全 |
-| W12 | 12/21–12/27 | 模拟 ③ + 按模拟成绩补最弱的两个域 | 全 |
+| ~~W1–W3~~ | 10/05–10/25 | ✅ 官方 SAP 样题 10 题逐题精读（只理解考点，不计分）；W2/W3 内容顺延到下面 | — |
+| W4 | 10/26–11/01 | 🔔 **10/27 报名订考位 + 下载 Exam Guide（补域权重、确认折扣券到期日）**；多账户治理：Organizations、SCP/RCP、Control Tower、IAM Identity Center、RAM、跨账户角色 | D2 |
+| W5 | 11/02–11/08 | 高级安全：权限边界、ABAC、KMS 多区域 / 跨账户、Security Hub 汇总、**后量子加密** | D2 |
+| W6 | 11/09–11/15 | 混合网络：TGW 拓扑、DX（LAG/SiteLink/DX Gateway）、Route 53 Resolver、PrivateLink | D1/D4 |
+| W7 | 11/16–11/22 | 韧性与 DR：四档 DR 的 RTO/RPO、Aurora Global、DynamoDB Global Tables、Elastic Disaster Recovery、**FIS** | D4 |
+| W8 | 11/23–11/29 | 迁移：7R、Migration Hub、MGN、DMS/SCT、DataSync、Snow 系列、Transfer Family | D4 |
+| W9 | 11/30–12/06 | 云原生：Serverless 模式（Step Functions、EventBridge Pipes）、容器（EKS 网络、ECS 进阶）、**数据湖仓**（Lake Formation、S3 Tables）；顺带补 SAA D3 弱项（缓存 / 数据库性能） | D1 |
+| W10 | 12/07–12/13 | 🆕 **GenAI 专项**：Bedrock、Knowledge Bases（RAG）、Guardrails、AgentCore、人工审核流程 | D1 |
+| W11 | 12/14–12/20 | **成本 + 运维/DevSecOps**（合并）：Savings Plans / RI 组合、CUR、Compute Optimizer、多账户成本分摊；CodePipeline、StackSets、Systems Manager、Config 自动修复 | D3/D5 |
+| W12 | 12/21–12/27 | **整套模拟 ①②**（TD SAP，有 C03 版就用 C03）+ 逐题复盘 → 🚦 **12/27 检查点** | 全 |
 | 年末 | 12/28–01/04 | 轻量复习：每天只读错题本 + cheatsheet（不学新内容） | — |
-| W13 | 01/05–01/10 | 模拟 ④ + 写考前速查表 `cheatsheets/sap-*.md` | 全 |
+| W13 | 01/05–01/10 | 模拟 ③④ + 写考前速查表 `cheatsheets/sap-*.md` | 全 |
 | 考前 | 01/11–01/15 | 只看错题和速查表，早睡 | — |
 | 🎯 | **01/16（土）** | **SAP-C03 考试** | |
 
-> ⚠️ 判断能不能考的标准（**看到成绩之前先定下**）：TD 模拟**连续两套 ≥ 75%** 才按期考，否则用免费改期往后推。
+> 📖 **每个模块的学法**：先讲知识点 → 再拿 2–3 道真题拆「真实考点 + 出题意图」（不用 Claude 出的题，SAA 时已证明偏简单）。
+> ⚠️ 判断能不能考的标准（**看到成绩之前先定下**）：**12/27 前** TD 模拟**连续两套 ≥ 75%** 才按期考，否则用免费改期推到 1 月底。
 > ⚠️ 第三方的 C03 题库刚上线时题少、质量也不稳；重合的内容可以先用 TD 的 SAP-C02 题练。
 
 ---
@@ -475,7 +478,8 @@ okj-aws-saa/
 - [ ] SAA-C03 模拟题通过率 > 80%
 - [x] SAA-C03 通过 🎉 **740/1000**（2026-10-04）
 - [x] SAP 版本决定：考 **SAP-C03**（2026-10-05）
-- [ ] SAP-C03 学习中（W1 基线诊断）
+- [x] SAP 官方样题 10 题逐题精读（2026-10-24）
+- [ ] SAP-C03 学习中（10/24 压缩计划，W4 多账户治理）
 - [ ] SAP-C03 报名（**2026-10-27 开放**，使用 50% 折扣券）
 - [ ] SAP-C03 TD 模拟连续两套 ≥ 75%
 - [ ] SAP-C03 通过
