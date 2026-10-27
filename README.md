@@ -328,13 +328,26 @@ SAA-C03 ✅ 740（2026-10-04）  →  SAP-C03（2026-10-05 起，目标 2027-01-
 |------|------|
 | 考试代码 | **SAP-C03** |
 | 前提条件 | 官方无强制要求（已持 SAA-C03） |
-| 题目数量 | 75 道（单/多选） |
-| 考试时长 | 180 分钟（**ESL +30 已永久生效 → 210 分钟**，以预约页显示为准） |
-| 通过分数 | 750 / 1000（C02 标准，C03 待 Exam Guide 确认） |
-| 考试费用 | $300 USD → **用 SAA 合格的 50% 折扣券**，约 ¥22,000 |
+| 题目数量 | 75 道（65 道计分 + 10 道不计分，单/多选） |
+| 考试语言 | **简体中文**（母语读题快、不漏限定条件；考场可切换查看英文原文） |
+| 考试时长 | 180 分钟。预约页显示 ESL +30 也自动带上了（时段 220 分钟 = 180 + 30 + 10 行政），但 ESL 原本是给**非母语**考试设的，**练习一律按 180 分钟 / 每题 2:24 计时** |
+| 通过分数 | **720 / 1000**（Exam Guide 确认，比 C02 的 750 低；补偿制，只看总分） |
+| 考试费用 | ¥44,000 → 50% 折扣券 −¥20,000 → **实付 ¥22,000**（VISA） |
 | 有效期 | 3 年 |
 
-### 📝 报名步骤（10/27 起）
+### ✅ 已报名（2026-10-27）
+
+| 项目 | 内容 |
+|------|------|
+| 考期 | **2027-01-16（土）09:30–13:10 JST**（09:00 前到场签到） |
+| 考场 | Shinbashi Kokukaikan **Test Center 1**（新桥国际会馆 2F，与 SAA 同一层） |
+| Order # | 0081-6880-0448 |
+| Registration ID | 550492558 |
+| Status | Scheduled |
+
+> 收据只发邮件（xiubaoli8@icloud.com），公司报销用。
+
+### 📝 报名步骤（备忘，已完成）
 
 1. **10/27 当天**：先读官方 Exam Guide，按实际域权重修正下面的周计划
 2. [CertMetrics](https://cp.certmetrics.com/amazon/) → **BENEFITS → Certification benefits** → 「50% Discount on your next Exam」卡片点 **CLAIM BENEFIT** 生成折扣码并复制（生成后再看一眼折扣码自己的有效期）
@@ -348,15 +361,19 @@ SAA-C03 ✅ 740（2026-10-04）  →  SAP-C03（2026-10-05 起，目标 2027-01-
 > 改期是免费的（考前 24h 以上、每个考位最多改 2 次），所以早订不亏。
 > 目标日期：**2027-01-16（土）**左右。避开年末年始，前面留出两周缓冲。
 
-### SAP-C03 考试域（权重 10/27 公布后补）
+### SAP-C03 考试域（2026-10-27 Exam Guide 公布）
+
+> 📖 [SAP-C03 Exam Guide](https://docs.aws.amazon.com/aws-certification/latest/solutions-architect-professional-03/solutions-architect-professional-03.html)（认证主页上暂时只挂了 C02 的链接）
 
 | 领域 | 占比 |
 |------|------|
-| Domain 1: Cloud-native architecture design and implementation | 待公布 |
-| Domain 2: Security, compliance, and governance | 待公布 |
-| Domain 3: Cost-optimized architecture design | 待公布 |
-| Domain 4: Resilience, migration, and business continuity | 待公布 |
-| Domain 5: Operational excellence and automation | 待公布 |
+| Domain 1: Architecture Design and Implementation Built for the Cloud（含 AI/ML 集成） | **25%** |
+| Domain 2: Security, Compliance, and Governance | **25%** |
+| Domain 3: Cost-Optimized Architecture Design | 15% |
+| Domain 4: Resilience, Migration, and Business Continuity | 15% |
+| Domain 5: Operational Excellence and Automation | **20%** |
+
+> 不考：OS 深度知识、模型训练 / 微调、安全取证、写代码调试。
 
 > C02 是 4 个域（组织复杂性 / 新方案 / 持续改进 / 迁移），C03 改成按 Well-Architected 支柱划分的 5 个域。
 > **C03 新增内容**：生成式 AI / Agentic AI（Bedrock、Bedrock AgentCore、RAG、Guardrails、人工审核流程）、
@@ -374,19 +391,19 @@ SAA-C03 ✅ 740（2026-10-04）  →  SAP-C03（2026-10-05 起，目标 2027-01-
 
 > 🔄 **2026-10-24 重排**：10/11 起暂停，原 W2（多账户治理）/ W3（高级安全）实际没学，相当于丢了两周。
 > 决定**考期保持 1/16 不变，压缩计划**：W1 基线诊断已由「官方样题 10 题逐题精读考点」替代；成本 + 运维合并为一周；模拟考从 3 周减到 2 周 + 年末。
-> 10/27 Exam Guide 公布域权重后，再按权重微调各周时间分配。
+> 🔄 **2026-10-27 按域权重重排 W7–W11**：D4（15%）原占两周 → 压成一周；D5（20%）原与成本合并只有半周 → 单独一周；成本（15%）单独一周。
 
 | 周 | 日期 | 内容 | 对应 C03 域 |
 |---|---|---|---|
 | ~~W1–W3~~ | 10/05–10/25 | ✅ 官方 SAP 样题 10 题逐题精读（只理解考点，不计分）；W2/W3 内容顺延到下面 | — |
-| W4 | 10/26–11/01 | 🔔 **10/27 报名订考位 + 下载 Exam Guide（补域权重、确认折扣券到期日）**；多账户治理：Organizations、SCP/RCP、Control Tower、IAM Identity Center、RAM、跨账户角色 | D2 |
+| W4 | 10/26–11/01 | ✅ 10/27 报名完成 + Exam Guide 域权重已补；多账户治理：Organizations、SCP/RCP、Control Tower、IAM Identity Center、RAM、跨账户角色 | D2 |
 | W5 | 11/02–11/08 | 高级安全：权限边界、ABAC、KMS 多区域 / 跨账户、Security Hub 汇总、**后量子加密** | D2 |
 | W6 | 11/09–11/15 | 混合网络：TGW 拓扑、DX（LAG/SiteLink/DX Gateway）、Route 53 Resolver、PrivateLink | D1/D4 |
-| W7 | 11/16–11/22 | 韧性与 DR：四档 DR 的 RTO/RPO、Aurora Global、DynamoDB Global Tables、Elastic Disaster Recovery、**FIS** | D4 |
-| W8 | 11/23–11/29 | 迁移：7R、Migration Hub、MGN、DMS/SCT、DataSync、Snow 系列、Transfer Family | D4 |
-| W9 | 11/30–12/06 | 云原生：Serverless 模式（Step Functions、EventBridge Pipes）、容器（EKS 网络、ECS 进阶）、**数据湖仓**（Lake Formation、S3 Tables）；顺带补 SAA D3 弱项（缓存 / 数据库性能） | D1 |
-| W10 | 12/07–12/13 | 🆕 **GenAI 专项**：Bedrock、Knowledge Bases（RAG）、Guardrails、AgentCore、人工审核流程 | D1 |
-| W11 | 12/14–12/20 | **成本 + 运维/DevSecOps**（合并）：Savings Plans / RI 组合、CUR、Compute Optimizer、多账户成本分摊；CodePipeline、StackSets、Systems Manager、Config 自动修复 | D3/D5 |
+| W7 | 11/16–11/22 | **韧性 + 迁移**（合并）：四档 DR 的 RTO/RPO、Aurora Global、DynamoDB Global Tables、Elastic Disaster Recovery、**FIS**；7R、MGN、DMS/SCT、DataSync、Snow、Transfer Family | D4 |
+| W8 | 11/23–11/29 | 云原生：Serverless 模式（Step Functions、EventBridge Pipes）、容器（EKS 网络、ECS 进阶）、**数据湖仓**（Lake Formation、S3 Tables）；顺带补 SAA D3 弱项（缓存 / 数据库性能） | D1 |
+| W9 | 11/30–12/06 | 🆕 **GenAI 专项**：Bedrock、Knowledge Bases（RAG）、Guardrails、AgentCore、人工审核流程 | D1 |
+| W10 | 12/07–12/13 | **运维 / DevSecOps**：CodePipeline、StackSets、Systems Manager、Config 自动修复、EventBridge 自动化、可观测性 | D5 |
+| W11 | 12/14–12/20 | **成本优化**：Savings Plans / RI 组合、CUR、Compute Optimizer、多账户成本分摊 | D3 |
 | W12 | 12/21–12/27 | **整套模拟 ①②**（TD SAP，有 C03 版就用 C03）+ 逐题复盘 → 🚦 **12/27 检查点** | 全 |
 | 年末 | 12/28–01/04 | 轻量复习：每天只读错题本 + cheatsheet（不学新内容） | — |
 | W13 | 01/05–01/10 | 模拟 ③④ + 写考前速查表 `cheatsheets/sap-*.md` | 全 |
@@ -481,8 +498,8 @@ okj-aws-saa/
 - [x] SAA-C03 通过 🎉 **740/1000**（2026-10-04）
 - [x] SAP 版本决定：考 **SAP-C03**（2026-10-05）
 - [x] SAP 官方样题 10 题逐题精读（2026-10-24）
-- [ ] SAP-C03 学习中（10/24 压缩计划，W4 多账户治理）
-- [ ] SAP-C03 报名（**2026-10-27 开放**，使用 50% 折扣券）
+- [ ] SAP-C03 学习中（10/27 按域权重重排，W4 多账户治理）
+- [x] SAP-C03 报名 ✅ **2027-01-16（土）09:30**，新桥 Test Center 1，简体中文，50% 折扣券实付 ¥22,000（2026-10-27）
 - [ ] SAP-C03 TD 模拟连续两套 ≥ 75%
 - [ ] SAP-C03 通过
 </content>
