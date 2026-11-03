@@ -396,7 +396,7 @@ SAA-C03 ✅ 740（2026-10-04）  →  SAP-C03（2026-10-05 起，目标 2027-01-
 | 周 | 日期 | 内容 | 对应 C03 域 |
 |---|---|---|---|
 | ~~W1–W3~~ | 10/05–10/25 | ✅ 官方 SAP 样题 10 题逐题精读（只理解考点，不计分）；W2/W3 内容顺延到下面 | — |
-| W4 | 10/26–11/01 | ✅ 10/27 报名完成 + Exam Guide 域权重已补；多账户治理：Organizations、SCP/RCP、Control Tower、IAM Identity Center、RAM、跨账户角色 | D2 |
+| W4 | 10/26–11/01 | ✅ 10/27 报名完成 + Exam Guide 域权重已补；✅ 多账户治理：Organizations、SCP/RCP、Control Tower、IAM Identity Center、RAM、跨账户角色（延至 11/03 讲完，笔记 `notes/sap/01`；真题拆解待补） | D2 |
 | W5 | 11/02–11/08 | 高级安全：权限边界、ABAC、KMS 多区域 / 跨账户、Security Hub 汇总、**后量子加密** | D2 |
 | W6 | 11/09–11/15 | 混合网络：TGW 拓扑、DX（LAG/SiteLink/DX Gateway）、Route 53 Resolver、PrivateLink | D1/D4 |
 | W7 | 11/16–11/22 | **韧性 + 迁移**（合并）：四档 DR 的 RTO/RPO、Aurora Global、DynamoDB Global Tables、Elastic Disaster Recovery、**FIS**；7R、MGN、DMS/SCT、DataSync、Snow、Transfer Family | D4 |
@@ -463,6 +463,7 @@ okj-aws-saa/
 │   │   ├── 16-containers.md   # ECS/EKS/Fargate + ECR + App Runner
 │   │   └── 17-iac-cost.md     # CloudFormation/Beanstalk + 成本优化
 │   └── sap/               # SAP-C03 进阶笔记（按周计划逐篇添加）
+│       └── 01-multi-account-governance.md  # SCP/RCP/Control Tower/Identity Center/RAM/跨账户角色
 ├── practice/
 │   ├── saa/               # SAA 错题本 + 模拟记录
 │   │   ├── 01-week1-2-errors.md
