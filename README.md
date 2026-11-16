@@ -501,7 +501,15 @@ okj-aws-saa/
 - [x] SAA-C03 通过 🎉 **740/1000**（2026-10-04）
 - [x] SAP 版本决定：考 **SAP-C03**（2026-10-05）
 - [x] SAP 官方样题 10 题逐题精读（2026-10-24）
-- [ ] SAP-C03 学习中（10/27 按域权重重排，W4 多账户治理）
+- [ ] SAP-C03 学习中：✅ W4 多账户治理 / ✅ W5 高级安全 / ✅ W6 混合网络（笔记 `notes/sap/01`–`03`）
+
+### 📍 下次从这里开始（2026-11-16 更新）
+
+- **下一步**：W7-1 **DR 四档**（Backup & Restore / Pilot Light / Warm Standby / Multi-site），从 SAP 考法讲起：给定 RTO/RPO 和预算，选出最便宜又满足要求的一档
+- **W7 剩余**：W7-2 Aurora Global / DynamoDB Global Tables / Elastic Disaster Recovery / FIS → W7-3 迁移 7R + 评估工具 → W7-4 MGN / DMS·SCT / DataSync / Snow / Transfer Family → 写 `notes/sap/04` 并 push
+- **开头复习**：从 `notes/sap/03` 第 6 节抽题；权限边界「拆锁」（`iam:DeleteRolePermissionsBoundary`）错过 3 次，隔几周再抽查
+- **真题**：用户决定 W4–W11 的真题**全部模块学完后一起做**，中途不催；但 **W12 整套模拟（12/21 起）不能再推**
+- **学法约定**：每部分先讲知识点 → 检查题；**复习题和检查题合并放在消息末尾**（放开头会被跳过）；出题不给可能是答案的格式示例、不加粗正确选项、笔记里的自测题不写答案；笔记写完直接 commit + push 并同步 README
 - [x] SAP-C03 报名 ✅ **2027-01-16（土）09:30**，新桥 Test Center 1，简体中文，50% 折扣券实付 ¥22,000（2026-10-27）
 - [ ] SAP-C03 TD 模拟连续两套 ≥ 75%
 - [ ] SAP-C03 通过
