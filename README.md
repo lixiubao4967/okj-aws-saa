@@ -398,7 +398,7 @@ SAA-C03 ✅ 740（2026-10-04）  →  SAP-C03（2026-10-05 起，目标 2027-01-
 | ~~W1–W3~~ | 10/05–10/25 | ✅ 官方 SAP 样题 10 题逐题精读（只理解考点，不计分）；W2/W3 内容顺延到下面 | — |
 | W4 | 10/26–11/01 | ✅ 10/27 报名完成 + Exam Guide 域权重已补；✅ 多账户治理：Organizations、SCP/RCP、Control Tower、IAM Identity Center、RAM、跨账户角色（延至 11/03 讲完，笔记 `notes/sap/01`；真题拆解待补） | D2 |
 | W5 | 11/02–11/08 | ✅ 高级安全（11/03–11/09 讲完，笔记 `notes/sap/02`；W4+W5 真题 11/09 一起做；W6 顺延至 11/10 起）：权限边界、ABAC、KMS 多区域 / 跨账户、Security Hub 汇总、**后量子加密** | D2 |
-| W6 | 11/09–11/15 | 混合网络：TGW 拓扑、DX（LAG/SiteLink/DX Gateway）、Route 53 Resolver、PrivateLink | D1/D4 |
+| W6 | 11/09–11/15 | ✅ 混合网络（11/16 讲完，笔记 `notes/sap/03`）：TGW 拓扑、DX（LAG/SiteLink/DX Gateway）、Route 53 Resolver、PrivateLink | D1/D4 |
 | W7 | 11/16–11/22 | **韧性 + 迁移**（合并）：四档 DR 的 RTO/RPO、Aurora Global、DynamoDB Global Tables、Elastic Disaster Recovery、**FIS**；7R、MGN、DMS/SCT、DataSync、Snow、Transfer Family | D4 |
 | W8 | 11/23–11/29 | 云原生：Serverless 模式（Step Functions、EventBridge Pipes）、容器（EKS 网络、ECS 进阶）、**数据湖仓**（Lake Formation、S3 Tables）；顺带补 SAA D3 弱项（缓存 / 数据库性能） | D1 |
 | W9 | 11/30–12/06 | 🆕 **GenAI 专项**：Bedrock、Knowledge Bases（RAG）、Guardrails、AgentCore、人工审核流程 | D1 |
@@ -464,7 +464,8 @@ okj-aws-saa/
 │   │   └── 17-iac-cost.md     # CloudFormation/Beanstalk + 成本优化
 │   └── sap/               # SAP-C03 进阶笔记（按周计划逐篇添加）
 │       ├── 01-multi-account-governance.md  # SCP/RCP/Control Tower/Identity Center/RAM/跨账户角色
-│       └── 02-advanced-security.md         # 权限边界/ABAC/KMS 多区域跨账户/Security Hub/后量子加密
+│       ├── 02-advanced-security.md         # 权限边界/ABAC/KMS 多区域跨账户/Security Hub/后量子加密
+│       └── 03-hybrid-networking.md         # TGW 进阶/DX 进阶/Route 53 Resolver/PrivateLink + VPC Lattice
 ├── practice/
 │   ├── saa/               # SAA 错题本 + 模拟记录
 │   │   ├── 01-week1-2-errors.md
