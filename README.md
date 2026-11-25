@@ -503,9 +503,9 @@ okj-aws-saa/
 - [x] SAP 官方样题 10 题逐题精读（2026-10-24）
 - [ ] SAP-C03 学习中：✅ W4 多账户治理 / ✅ W5 高级安全 / ✅ W6 混合网络（笔记 `notes/sap/01`–`03`）/ 🚧 W7 弹性与迁移（`notes/sap/04` 进行中）
 
-### 📍 下次从这里开始（2026-11-24 更新）
+### 📍 下次从这里开始（2026-11-25 更新）
 
-- **下一步**：W7-1 ✅ 已完成（批改见 `notes/sap/04` 第 5 节）→ **开始学 W7-2**：Aurora Global / DynamoDB Global Tables / Elastic Disaster Recovery / FIS
+- **下一步**：W7-2 讲义已写入 `notes/sap/04` 第 2 节，**检查题 4 道 + 复习题 2 道在第 6 节末尾，待作答** → 答完批改后进 W7-3
 - **W7 剩余**：W7-2 → W7-3 迁移 7R + 评估工具 → W7-4 MGN / DMS·SCT / DataSync / Snow / Transfer Family → 补全 `notes/sap/04` 并 push
 - **开头复习**（出在 W7-2 检查题末尾）：① ARC 为什么解决不了 DNS 缓存（W7-1 错）② S3 经 DX 为什么只能走 Interface Endpoint + DNS 怎么配（W6 R3 错）③ 权限边界「拆锁」（`iam:DeleteRolePermissionsBoundary`）错过 3 次，隔几周再抽查
 - **重复失分模式**：知道选哪个，但说不出**为什么不选另一个**；答题时要能讲出干扰项错在哪
