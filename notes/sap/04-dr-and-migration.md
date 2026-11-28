@@ -1,6 +1,6 @@
 # 弹性与迁移：DR 四档 / 跨区域数据层 / 迁移 7R / 迁移工具
 
-> SAP-C03 W7 · 2026-11-17 起（🚧 进行中：W7-1 ✅ 已完成，下一步 W7-2）
+> SAP-C03 W7 · 2026-11-17 起（🚧 进行中：W7-1/W7-2 ✅，W7-3 讲完待答题，下一步 W7-4）
 > **Domain 4（Resilience, Migration）**
 > SAA 基础见 `notes/saa/` 中 DR 相关章节
 
@@ -134,7 +134,75 @@
 
 ## 3. W7-3 迁移 7R + 评估工具
 
-（待学）
+> 一句话定位：7R 回答**「每个应用怎么迁」**，评估工具回答**「有什么、花多少钱、谁依赖谁、先迁谁」**。
+
+### 3.1 迁移三阶段（AWS 官方框架）
+
+| 阶段 | 要做的事 | 典型工具 |
+|---|---|---|
+| **Assess（评估）** | 摸清现状、算 TCO、做商业论证 | Migration Evaluator、MRA（迁移就绪评估） |
+| **Mobilize（准备）** | 搭 Landing Zone、详细发现与依赖分析、按应用定 7R、**分批（wave）规划** | Application Discovery Service、Control Tower |
+| **Migrate & Modernize（迁移与现代化）** | 按 wave 执行迁移，迁完再优化 | MGN、DMS、DataSync…（W7-4） |
+
+> 资金支持：**MAP（Migration Acceleration Program）** 按这三阶段给补贴和专家支持。
+
+### 3.2 7R 对照表（从「改动最少」到「改动最多」）
+
+| 策略 | 中文 | 做什么 | 典型例子 / AWS 工具 |
+|---|---|---|---|
+| **Retire** | 下线 | 没人用了，直接关掉 | 发现阶段查到长期零访问的系统 |
+| **Retain** | 保留 | 暂时不迁（合规、刚升级完、依赖没解决） | 留在本地，以后再说 |
+| **Relocate** | 平移 | **整个虚拟化平台**搬上云，VM 不改、运维工具不变 | VMware → **Amazon EVS**（Elastic VMware Service）/ VMware Cloud on AWS |
+| **Rehost** | 直接迁移（lift-and-shift） | 服务器原样搬到 EC2 | **MGN** |
+| **Replatform** | 平台优化（lift-tinker-shift） | **不改核心代码**，换成托管平台 | 自建 MySQL → RDS；应用 → Beanstalk / 容器 |
+| **Repurchase** | 换购（drop-and-shop） | 放弃自建，改用 SaaS | 自建 CRM → Salesforce；Exchange → Microsoft 365 |
+| **Refactor / Re-architect** | 重构 | 改代码、改架构，做成云原生 | 单体 → 微服务 / Lambda |
+
+**容易混的三对**：
+- **Relocate vs Rehost**：Relocate 搬的是**整个 vSphere 平台**（几天搬几百台，不碰每台 VM）；Rehost 是**逐台服务器**复制到 EC2
+- **Rehost vs Replatform**：数据库搬到 EC2 上自己装 = Rehost；搬到 RDS = Replatform。看「有没有换成托管服务」
+- **Replatform vs Refactor**：看**改不改应用代码**。只改配置/连接串 = Replatform；拆服务、改架构 = Refactor
+
+**做题信号**：
+
+| 题干关键词 | 选 |
+|---|---|
+| 「最快」「数据中心合同快到期」「不改应用」 | Rehost（MGN）；VMware 且要保留现有工具 → Relocate |
+| 「减少运维负担」「但不能改代码」 | Replatform |
+| 「弹性伸缩、按需付费、敏捷」「愿意投入开发」 | Refactor |
+| 「许可证太贵」「功能有现成 SaaS」 | Repurchase |
+
+### 3.3 评估工具
+
+| 工具 | 解决什么问题 | 关键点 |
+|---|---|---|
+| **Migration Evaluator**（原 TSO Logic） | **商业论证 / TCO**：搬上云要花多少钱 | 无 agent 采集器，按**实际利用率 right-size**，考虑**许可证**（BYOL vs 包含许可证）。「给 CFO 看成本」「几周出报告」 → 它 |
+| **Application Discovery Service（ADS）** | **详细清单 + 依赖关系**，用于 wave 规划 | 两种采集方式，见下表 |
+| **Migration Hub** | **统一追踪**：所有迁移工具的进度汇总到一个看板 | 只追踪，不执行迁移 |
+| Migration Hub **Strategy Recommendations** | 分析应用（含二进制/源码），**推荐 7R 策略** | — |
+| Migration Hub **Refactor Spaces** | 为**绞杀者模式（strangler fig）**自动搭好路由基础设施 | 自动建 API Gateway / NLB / TGW，逐步把功能切到新服务 |
+| **AWS Transform** | **AI agent 驱动的迁移与现代化**（VMware 迁移、大型机、.NET 移植） | 2025 年推出的新服务，逐步接替 Migration Hub 系列的部分功能 |
+
+> ⚠️ 服务变化：Migration Hub 系列 2025 年起逐步对新客户关闭，AWS 推 AWS Transform。SAP-C03 题目可能出现新名字，也可能还是老名字，两边都要认得。
+
+**ADS 两种采集方式**（必考对比）：
+
+| | Agentless Collector | Discovery Agent |
+|---|---|---|
+| 部署 | 在 **VMware vCenter** 里部署一个 OVA | **每台服务器**装 agent |
+| 适用 | 只限 VMware 虚拟机 | 物理机、VM、任何环境 |
+| 采集内容 | 配置、CPU/内存/磁盘利用率 | 以上 + **运行中进程** + **网络连接** |
+| **依赖关系** | ❌ 做不了 | ✅ 能画出服务器之间谁连谁 |
+
+> 记忆：**要依赖关系 → 必须装 agent**（只有 agent 能在系统里看到网络连接和进程）。
+> 数据可以导出到 S3，再用 **Athena + QuickSight** 分析。
+
+### 3.4 绞杀者模式（Strangler Fig）—— Refactor 的标准做法
+
+- 不一次性重写。在单体前面放一个**路由层**（API Gateway / ALB），**按 URL 路径**把已经拆出来的功能转发给新服务，其余路径继续给单体
+- 逐个功能迁移，每次只切一条路径，出问题**只回滚这一条路由**
+- 单体越来越小，最后下线
+- 和「一次性重写 + Route 53 加权路由」的区别：加权路由是**按请求比例**切整个应用，不是**按功能**切；而且要等全部重写完才能开始
 
 ## 4. W7-4 MGN / DMS·SCT / DataSync / Snow / Transfer Family
 
@@ -202,3 +270,26 @@
 
 - R1.（W7-1 错题）为什么 Route 53 ARC 解决不了客户端 DNS 缓存问题？什么能解决？
 - R2.（W6 R3 错题）本地经 DX 访问 S3，为什么必须用 Interface Endpoint？本地 DNS 要怎么配？
+
+**W7-3 检查题（2026-11-28 出）**
+
+1. 公司有 800 台本地服务器，计划 18 个月内迁到 AWS。CFO 要求先看一份按实际利用率 right-size 后的 TCO 商业论证，几周内交付，不希望在每台服务器上装软件。用什么工具？为什么不用 Application Discovery Service？
+2. 进入 Mobilize 阶段，需要知道哪些服务器之间有网络依赖，以便把相互依赖的服务器放进同一批迁移。环境里有 VMware VM，也有物理机。ADS 用哪种采集方式？另一种为什么不行？
+3. 下面五个应用分别属于 7R 中的哪一种？
+   - a. 自建 Exchange 邮件服务器，改用 Microsoft 365
+   - b. VM 上的 Oracle 数据库，迁到 Amazon RDS for Oracle，应用代码不改
+   - c. 200 台 VMware VM，数据中心合同 3 个月后到期，运维团队要继续用 vCenter 和现有脚本
+   - d. 一套报表系统，近 6 个月访问日志几乎为零
+   - e. 一台大型机，因监管审批要到明年才能动
+4. 一个 Java 单体电商应用要逐步拆成微服务。要求迁移期间对外 URL 不变，每次只切一个功能，切出问题能只回滚那个功能。
+   - A. 在新环境把整个应用重写成微服务，完成后用 Route 53 加权路由从 10% 逐步切到 100%
+   - B. 在单体前面放 API Gateway，按 URL 路径把已拆出的功能路由到新的 Lambda/容器服务，其余路径继续转发到单体
+   - C. 用 MGN 把单体 rehost 到 EC2，配置 Auto Scaling 应对流量
+   - D. 把单体容器化部署到 ECS，用蓝绿部署发布新版本
+   选哪个？其他三个分别错在哪？
+
+**同时出的复习题**
+
+- R1.（W7-2 Q3 错）MGN 和 DRS 用同一套复制技术，区别在哪？题干出现什么词时选 DRS？
+- R2.（W7-2 Q1 没说清）Aurora Global Database 的 Failover 为什么可能丢数据？Switchover 为什么不会？
+- R3.（W5 错 3 次）给开发者授予创建角色的权限、并用权限边界限制他们时，还必须禁止哪个操作？不禁止会怎样？
