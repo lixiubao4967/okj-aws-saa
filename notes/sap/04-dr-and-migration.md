@@ -1,6 +1,6 @@
 # 弹性与迁移：DR 四档 / 跨区域数据层 / 迁移 7R / 迁移工具
 
-> SAP-C03 W7 · 2026-11-17 起（🚧 进行中：W7-1/W7-2 ✅，W7-3 讲完待答题，下一步 W7-4）
+> SAP-C03 W7 · 2026-11-17 起（🚧 进行中：W7-1/W7-2/W7-3 ✅，下一步 W7-4）
 > **Domain 4（Resilience, Migration）**
 > SAA 基础见 `notes/saa/` 中 DR 相关章节
 
@@ -235,6 +235,20 @@
 
 > 🔁 新模式：**排除法排到最后，宁可选「自己知道有问题」的熟悉选项，也不选没认出的选项**（Q3）。考场规则：如果自己都说出了某个选项的硬伤（「这是一次性的」），那它就一定不是答案，回头重读剩下的选项。
 
+**W7-3 批改（2026-11-28）**：W7-3 2.2/4，复习 2.3/3
+
+| # | 我的答案 | 问题 | 正确理解 |
+|---|---|---|---|
+| Q1 | Migration Evaluator；ADS 是查依赖不是做商业论证 | ✅ 方向对，理由少一半 | 题干还有一个硬条件「不在每台服务器上装软件」：ADS 要拿全数据就得装 Discovery Agent，Agentless Collector 又只能采集 VMware；而且 ADS **不出 TCO/许可证成本报告**。Migration Evaluator 不用装 agent，几周就能出 right-size 和许可证成本 |
+| Q2 | Discovery Agent；Agentless 探测不了物理机的进程 | 理由不准 | Agentless 有**两处**不行：① 只能通过 vCenter 采集，**物理机根本采集不到**；② 就算是 VMware VM，也**拿不到网络连接** → 画不出依赖关系。要依赖关系就必须装 agent |
+| Q3 | a Replatform / b Refactor / c Retain / d Retire ✅ / e Rehost | ❌ **5 个错 4 个** | a **Repurchase**（改用 SaaS，判断点是自建 → 买现成服务）；b **Replatform**（换成托管服务、代码不改；Refactor 必须改代码）；c **Relocate**（整个 VMware 平台搬上云，保留 vCenter → Amazon EVS）；e **Retain**（不能动 = 暂时不迁。而且大型机没法 rehost 到 EC2，要走 AWS Transform 重构） |
+| Q4 | B | 选对，但**题目要求说出另外三个错在哪，没写** | A：一次性重写，加权路由按**请求比例**切换整个应用，不能按功能切，回滚也只能整体回滚；C：Rehost 根本没有拆分，和需求无关；D：容器化 + 蓝绿部署还是**整个单体**一起发布，不能按功能切换 |
+| R3 | 禁止删除权限边界策略，否则会越界 | 第 4 次说不准 | 要禁止的是 `iam:DeleteRolePermissionsBoundary`（**从角色上摘掉边界**，不是删除策略本身）。完整做法：① `iam:CreateRole` 加条件 `iam:PermissionsBoundary` = 指定边界；② Deny `DeleteRolePermissionsBoundary`；③ Deny 修改边界策略本身（`CreatePolicyVersion` / `DeletePolicy` 等）。不禁止 ① 和 ② 的后果：开发者把自己建的角色的边界摘掉，角色就拿到身份策略的全部权限，实现**权限提升** |
+
+> R1（MGN = 一次性迁移，切换后停止复制；DRS = 长期持续复制 + 演练 + 回切）✅、R2（Failover 不等复制完就切，RPO = 复制延迟；Switchover 同步完再切，RPO = 0）✅，从轮换中移除。
+> 🔁 **7R 判断顺序**（治 Q3）：① 还用不用？不用 → Retire ② 现在能不能动？不能 → Retain ③ 换成别人的 SaaS？→ Repurchase ④ 整个 VMware 平台一起搬？→ Relocate ⑤ 改不改代码？改 → Refactor ⑥ 换成托管服务？换 → Replatform，不换 → Rehost
+> 🔁 Q4 再次出现「只选不排除」。题目明确要求说出其他选项错在哪时，没写就按半分算。
+
 ## 6. 自测题（不写答案）
 
 **W7-1 检查题（2026-11-17 出，2026-11-24 已作答，批改见第 5 节）**
@@ -271,7 +285,7 @@
 - R1.（W7-1 错题）为什么 Route 53 ARC 解决不了客户端 DNS 缓存问题？什么能解决？
 - R2.（W6 R3 错题）本地经 DX 访问 S3，为什么必须用 Interface Endpoint？本地 DNS 要怎么配？
 
-**W7-3 检查题（2026-11-28 出）**
+**W7-3 检查题（2026-11-28 出，同日已作答，批改见第 5 节）**
 
 1. 公司有 800 台本地服务器，计划 18 个月内迁到 AWS。CFO 要求先看一份按实际利用率 right-size 后的 TCO 商业论证，几周内交付，不希望在每台服务器上装软件。用什么工具？为什么不用 Application Discovery Service？
 2. 进入 Mobilize 阶段，需要知道哪些服务器之间有网络依赖，以便把相互依赖的服务器放进同一批迁移。环境里有 VMware VM，也有物理机。ADS 用哪种采集方式？另一种为什么不行？

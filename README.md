@@ -505,9 +505,9 @@ okj-aws-saa/
 
 ### 📍 下次从这里开始（2026-11-28 更新）
 
-- **下一步**：W7-3 迁移 7R + 评估工具 **已讲完（2026-11-28），检查题待作答**（题目在 `notes/sap/04` 第 6 节末尾）→ 作答批改后学 W7-4
-- **W7 剩余**：W7-3 答题批改 → W7-4 MGN / DMS·SCT / DataSync / Snow / Transfer Family → 补全 `notes/sap/04` 并 push
-- **开头复习**（出在 W7-3 检查题末尾）：① MGN 和 DRS 的区别（W7-2 Q3 错）② Aurora Failover 为什么会丢数据（W7-2 Q1 没说清）③ 权限边界「拆锁」（`iam:DeleteRolePermissionsBoundary`）错过 3 次，隔几周再抽查。R1 ARC/DNS 缓存已掌握，不再出
+- **下一步**：W7-3 ✅ 已完成（2.2/4，批改见 `notes/sap/04` 第 5 节）→ **开始学 W7-4**：MGN / DMS·SCT / DataSync / Snow / Transfer Family
+- **W7 剩余**：W7-4 → 补全 `notes/sap/04` 并 push
+- **开头复习**（出在 W7-4 检查题末尾）：① **7R 分类再考一轮**（W7-3 Q3 五个错四个，按第 5 节的判断顺序做）② ADS Agentless 的两处限制（W7-3 Q2）③ 权限边界：`iam:DeleteRolePermissionsBoundary` + CreateRole 条件（**已错 4 次，下次继续抽**）。MGN/DRS、Aurora Failover 已掌握，不再出
 - **重复失分模式**：知道选哪个，但说不出**为什么不选另一个**；答题时要能讲出干扰项错在哪
 - **真题**：用户决定 W4–W11 的真题**全部模块学完后一起做**，中途不催；但 **W12 整套模拟（12/21 起）不能再推**
 - **学法约定**：每部分先讲知识点 → 检查题；**复习题和检查题合并放在消息末尾**（放开头会被跳过）；出题不给可能是答案的格式示例、不加粗正确选项、笔记里的自测题不写答案；笔记写完直接 commit + push 并同步 README
